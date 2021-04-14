@@ -1,0 +1,26 @@
+.bg-dark {
+	color: #a7d1f9;
+}
+
+.wrap {
+	margin: 0;
+}
+.banner {
+	margin-top: -120px;
+}
+.banner-img {
+	/* margin-top: -70px; */
+}
+
+.img-fluid {
+	/* height: 90%; */
+}
+.footer-logo {
+	width: 220px;
+}
+.d-block {
+	margin-left: 20px;
+}
+.text-muted {
+	color: #e7f7ff !important;
+}

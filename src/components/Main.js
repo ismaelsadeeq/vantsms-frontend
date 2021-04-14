@@ -24,6 +24,9 @@ function Main() {
     <div>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/api" exact component={Home} />
+        <Route path="/features" exact component={Home} />
+        <Route path="/pricing" exact component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route exact path="/dashboard" component={Dashboard} />
@@ -41,7 +44,7 @@ function Main() {
         <Route exact path="/forget-password" component={ForgetPassword} />
         <Route exact path="/reset-password" component={ResetPassword} />
         <Route exact path="/change-password" component={ChangePassword} />
-        <Redirect path="/" exact />
+        <Redirect path="/" />
       </Switch>
     </div> 
   )
