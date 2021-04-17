@@ -77,6 +77,11 @@ p {
   margin-bottom: 1.25rem;
   color: var(--clr-grey-5);
 }
+nav {
+  position:fixed;
+  width: 100%;
+  z-index: 1030;
+}
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 4rem;

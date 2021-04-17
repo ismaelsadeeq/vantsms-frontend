@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-// import { FaBars } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { links, } from './data';
 import '../Stylesheet/nav.css'
 import logo from './assets/images/verifier_logo.png';
@@ -24,8 +24,7 @@ function Navbar() {
         <div className='nav-header'>
           <img src={logo} className='logo' alt='logo' />
           <button className='nav-toggle' onClick={toggleLinks}>
-            {/* <FaBars /> */}
-            Hello
+            <FaBars />
           </button>
         </div>
         <div className='links-container' ref={linksContainerRef}>
