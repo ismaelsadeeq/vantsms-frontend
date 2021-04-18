@@ -12,7 +12,6 @@ function Register() {
     email:'',
     phoneNumber:'',
     password:'',
-    isCorporate:true,
     confirmPassword:''
   }
   const [info, setInfo] = useState(data);
@@ -57,8 +56,10 @@ function Register() {
           data: info
         }).then(response=>{
           console.log(response.data);
-          let token = response.data.
-          localStorage.setItem('token',JSON.stringify(token))
+          let token = response.data.token
+          let user = response.data.data
+          localStorage.setItem('token',JSON.stringify(token));
+          localStorage.setItem('user',JSON.stringify(user));
           history.push('/dashboard')
         })
         .catch(error=>{
