@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
+import { useHistory } from "react-router-dom";
 import Navbar from './Navbar'
 import '../Stylesheet/register.css'
 import axios from 'axios'
-import request from 'request'
+
 function Register() {
+  let history = useHistory();
   const data = {
     firstname:'',
     lastname:'',
@@ -27,6 +29,7 @@ function Register() {
   }
   function submitHandler (e) {
     e.preventDefault();
+    setLoading(true);
     console.log(info);
     axios({
       method: 'post',
@@ -34,11 +37,41 @@ function Register() {
       data: info
     })
     .then(response=>{
-        console.log(response);
-      })
-      .catch(error=>{
-        console.log(error);
-      })
+      console.log(response.data);
+      if(response.data === 'password didnt match'){
+        history.push('/register')
+      }
+      if(response.data.status === false && response.data.message === 'you have an account sign in'){
+        history.push('/login')
+      }
+      if(response.data.status === false && response.data.message === 'empty post'){
+        history.push('/register')
+      }
+      if(response.data.status === false && response.data.message === 'Could not create account'){
+        history.push('/register')
+      }
+      if(response.data.status === true && response.data.message === 'Account created succesfully'){
+        axios({
+          method: 'post',
+          url: 'http://localhost:8081/api/v1/auth/login',
+          data: info
+        }).then(response=>{
+          console.log(response.data);
+          let token = response.data.
+          localStorage.setItem('token',JSON.stringify(token))
+          history.push('/dashboard')
+        })
+        .catch(error=>{
+          history.push('/login')
+          console.log(error);
+        })
+      }
+    })
+    .catch(error=>{
+      history.push('/login')
+      console.log(error);
+    })
+    
   }
   if(loading){
     return (

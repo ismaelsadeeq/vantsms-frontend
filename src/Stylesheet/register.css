@@ -79,6 +79,23 @@ input {
 .forget {
 	margin-left: 4.5rem;
 }
+.loader {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	z-index: 2147483647;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: rgba(255, 255, 255, 0.96);
+}
+.text-danger {
+	color: rgb(210, 62, 221) !important;
+}
 @media screen and (min-width: 768px) {
 	.container-form {
 		margin-top: 120px;
