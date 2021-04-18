@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+.containerr {
+  padding-top: 1rem ; 
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (max-width:600px){
+  .containerr {
+    padding-top: 0;
+  }
+  section {
+    background-size: auto 100%;
+    background-attachment: scroll;
+  }
+}
+/* copied */
+.container-form {
+	box-shadow: 0px 4px 20px 1px #888;
+	border-radius: 50px 0px;
+	max-width: 500px;
+	margin: 30px auto;
+	margin-top: 100px;
+}
+
+.form-heading {
+	text-align: center;
+	border-radius: 5px;
+	font-size: 0.7rem;
+	padding-top: 3rem;
+}
+
+.form-container {
+	padding: 2rem;
+	border-radius: 5px;
+}
+
+input {
+	border: 1px solid black;
+	width: 100%;
+	border-radius: 5px;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.input:hover {
+	background: #f8f4f4;
+}
+
+.button {
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	border-radius: 5px;
+	padding: 1rem;
+	color: #fff;
+	font-weight: 800;
+}
+
+.form-buttom-text {
+	color: #000;
+	font-size: 0.7em;
+	text-align: center;
+	padding-top: 2rem;
+}
+
+.red {
+	color: #ff0000;
+}
+.forget {
+	margin-left: 4.5rem;
+}
+@media screen and (min-width: 768px) {
+	.container-form {
+		margin-top: 120px;
+	}
+}
