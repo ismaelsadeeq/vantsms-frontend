@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import Navbar from './Navbar'
+import Processing from './Processing'
 import '../Stylesheet/register.css'
 import axios from 'axios'
 
@@ -18,7 +19,6 @@ function Register() {
   const [loading, setLoading] = useState(false);
   
   function changeHandler (e){
-    console.log(e.target.value)
     const property = e.target.name;
     const value = e.target.value;
     setInfo(ev => ({
@@ -44,9 +44,10 @@ function Register() {
         history.push('/login')
       }
       if(response.data.status === false && response.data.message === 'empty post'){
-        history.push('/register')
+        setLoading(false)
       }
       if(response.data.status === false && response.data.message === 'Could not create account'){
+        setLoading(false);
         history.push('/register')
       }
       if(response.data.status === true && response.data.message === 'Account created succesfully'){
@@ -60,7 +61,7 @@ function Register() {
           let user = response.data.data
           localStorage.setItem('token',JSON.stringify(token));
           localStorage.setItem('user',JSON.stringify(user));
-          history.push('/dashboard')
+          history.push('/verify')
         })
         .catch(error=>{
           history.push('/login')
@@ -69,23 +70,10 @@ function Register() {
       }
     })
     .catch(error=>{
-      history.push('/login')
+      setLoading(false)
       console.log(error);
     })
     
-  }
-  if(loading){
-    return (
-      <div>
-        <Navbar />
-        <div className="loader">
-          <h6 className="text-danger">
-            Processing ...<br></br>
-            Please wait 
-          </h6>
-        </div>
-      </div>
-    )
   }
   return (
     <div>
@@ -130,7 +118,7 @@ function Register() {
         </section>
       </section>
       {
-        
+        loading ? <Processing /> :<span></span>
       }
   </div>
   )
