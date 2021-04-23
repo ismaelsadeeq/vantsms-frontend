@@ -1,10 +1,10 @@
 import React from 'react'
 
-function VerifyError() {
+function VerifyError({message}) {
   return (
     <div>
       <div className="text-danger2 text-center info-danger" >
-          Incorrect code
+          Incorrect {message}
       </div>
     </div>
   )

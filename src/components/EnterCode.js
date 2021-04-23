@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import  '../Stylesheet/verify.css'
+import Processing from './Processing'
 import Navbar from '../components/Navbar'
 import VerifyError from '../components/VerifyError'
-import Processing from './Processing'
+import '../Stylesheet/forget.css'
 
-function Verify() {
+
+function EnterCode() {
   let history = useHistory();
   const data = {
-    code:''
+    email:''
   }
   const getLocalStorage = () =>{
     let user = localStorage.getItem('user')
@@ -22,6 +23,7 @@ function Verify() {
   const [store,setStore] = useState(getLocalStorage())
   const [info, setInfo] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
   const [error, setError] = useState(false);
   function changeHandler (e){
     const property = e.target.name;
@@ -41,13 +43,14 @@ function Verify() {
       data: info
     }).then(response=>{
       console.log(response.data.message);
-      if(response.data.message === 'Account is already verified'){
-        history.push('/dashboard')
+      if(response.data.message === 'An error occurred'){
+        history.push('/forget-password')
       }
-      if(response.data.message === 'Account Verified'){
-        history.push('/dashboard')
+      if(response.data.message === 'code Sent'){
+        history.push('/enter-code')
       }
-      if(response.data.message === 'Invalid Code entered'){
+      if(response.data.message === 'No account with this email'){
+        setMessage('Sorry No Account with this email')
         setLoading(false)
         setError(true)
       }
@@ -57,32 +60,35 @@ function Verify() {
       console.log(error);
     })
   }
-
   return (
-    <div>
-      <Navbar />
-    <section className="container">
-      <section className="container-form">
+    <>
+    <Navbar />
+  <section className="container">
+   
+    <section className="container-formm">
 
-        <div className="form-heading">
-          <h6>Enter the 6 digit code sent to your Email</h6>
+      <div className="form-headingg">
+        <h3>Reset your password</h3>
+      </div>
+    
+
+      <form onSubmit={(e)=>{submitHandler(e)}} className="form-containerr">
+      {
+        error ? <VerifyError message={message} />:<div></div>
+      }
+        <div className="field">
+          <label className="labell">Enter the code sent to your Mail</label>
+          <input className="inputt" type="email" placeholder="Email" onChange={(e)=>{changeHandler(e)}} required />
         </div>
-        <form onSubmit={(e)=>{submitHandler(e)}} className="form-container">
-          {
-            error ? <VerifyError message='code' />:<div></div>
-          }
-          <div className="field">
-            <input className="Vinput" name="code" maxLength="6" type="text" placeholder="- - - - -" value={info.code} onChange={(e)=>{changeHandler(e)}} required />
-          </div>        
-          <button className="button btn-success" >Verify</button>
-        </form>
-      </section>
+        <button className="buttonn btn-success">Submit</button> 
+      </form>
     </section>
     {
-        loading ? <Processing /> :<span></span>
-      }
-</div>
+      loading ? <Processing /> :<span></span>
+    }
+  </section>
+  </>
   )
 }
 
-export default Verify
+export default EnterCode

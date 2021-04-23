@@ -72,8 +72,8 @@ function Login() {
             <button type="submit" className="button btn-success" >Log In</button>
 
             <div className="form-buttom">
-              <p className="form-buttom-text">Not Registered? <span className="red"><a href='/register'>Create an account</a></span></p>
-              <a className="red forget" href='/forget-password'>Forgot Password?</a>
+              <p className="form-buttom-text">Not Registered? <span className="red"><a className="red " href='/register'>Create an account</a></span></p>
+              <a className="red " href='/forget-password'>Forgot Password?</a>
             </div>
           </form>
         </section>

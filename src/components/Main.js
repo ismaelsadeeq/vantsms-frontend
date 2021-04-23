@@ -18,6 +18,7 @@ import Profile from './protected/Profile'
 import Setting from './protected/Setting'
 import Transaction from './protected/Transaction'
 import Support from './protected/Support'
+import EnterCode from './EnterCode'
 
 function Main() {
   return (
@@ -44,6 +45,7 @@ function Main() {
         <Route exact path="/forget-password" component={ForgetPassword} />
         <Route exact path="/reset-password" component={ResetPassword} />
         <Route exact path="/change-password" component={ChangePassword} />
+        <Route exact path="/enter-code" component={EnterCode} />
         <Redirect path="/" />
       </Switch>
     </div> 
