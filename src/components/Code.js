@@ -7,10 +7,10 @@ import VerifyError from '../components/VerifyError'
 import '../Stylesheet/forget.css'
 
 
-function EnterCode() {
+function Code() {
   let history = useHistory();
   const data = {
-    email:''
+    code:''
   }
   const getLocalStorage = () =>{
     let user = localStorage.getItem('user')
@@ -39,18 +39,20 @@ function EnterCode() {
     console.log(info);
     axios({
       method: 'post',
-      url: 'http://localhost:8081/api/v1/auth/verify-email',
+      url: 'http://localhost:8081/api/v1/auth/reset-password',
       data: info
     }).then(response=>{
-      console.log(response.data.message);
-      if(response.data.message === 'An error occurred'){
-        history.push('/forget-password')
+      console.log(response.data);
+      if(response.data === 'password changed'){
+        history.push('/login')
       }
-      if(response.data.message === 'code Sent'){
-        history.push('/enter-code')
+      if(response.data === 'password did not match'){
+        setMessage('Password and confirm password do not match')
+        setLoading(false)
+        setError(true)
       }
-      if(response.data.message === 'No account with this email'){
-        setMessage('Sorry No Account with this email')
+      if(response.data === 'incorrect pin'){
+        setMessage('Incorrect Code')
         setLoading(false)
         setError(true)
       }
@@ -63,9 +65,9 @@ function EnterCode() {
   return (
     <>
     <Navbar />
-  <section className="container">
+      <section className="container">
    
-    <section className="container-formm">
+      <section className="container-formm">
 
       <div className="form-headingg">
         <h3>Reset your password</h3>
@@ -78,7 +80,11 @@ function EnterCode() {
       }
         <div className="field">
           <label className="labell">Enter the code sent to your Mail</label>
-          <input className="inputt" type="email" placeholder="Email" onChange={(e)=>{changeHandler(e)}} required />
+          <input className="inputt" type="text" placeholder="- - - - -" value={info.code} onChange={(e)=>{changeHandler(e)}} required />
+          <label className="labell">Enter new Password</label>
+          <input className="inputt" type="text" placeholder="Password" value={info.password} onChange={(e)=>{changeHandler(e)}} required />
+          <label className="labell">Confirm new Password</label>
+          <input className="inputt" type="text" placeholder="Confirm Password" value={info.confirmPassword} onChange={(e)=>{changeHandler(e)}} required />
         </div>
         <button className="buttonn btn-success">Submit</button> 
       </form>
@@ -91,4 +97,4 @@ function EnterCode() {
   )
 }
 
-export default EnterCode
+export default Code

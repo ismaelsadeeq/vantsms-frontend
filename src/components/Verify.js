@@ -69,7 +69,7 @@ function Verify() {
         </div>
         <form onSubmit={(e)=>{submitHandler(e)}} className="form-container">
           {
-            error ? <VerifyError message='code' />:<div></div>
+            error ? <VerifyError message='Incorrect code' />:<div></div>
           }
           <div className="field">
             <input className="Vinput" name="code" maxLength="6" type="text" placeholder="- - - - -" value={info.code} onChange={(e)=>{changeHandler(e)}} required />

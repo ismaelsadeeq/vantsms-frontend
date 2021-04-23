@@ -43,7 +43,7 @@ function ForgetPassword() {
     }).then(response=>{
       console.log(response.data.message);
       if(response.data.message === 'An error occurred'){
-        history.push('/forget-password')
+        history.push('/forget-password');
       }
       if(response.data.message === 'code Sent'){
         history.push('/enter-code')
@@ -60,7 +60,7 @@ function ForgetPassword() {
     })
   }
   return (
-    <>
+    <div>
     <Navbar />
   <section className="container">
    
@@ -77,7 +77,7 @@ function ForgetPassword() {
       }
         <div className="field">
           <label className="labell">Enter your email address</label>
-          <input className="inputt" type="email" placeholder="Email" onChange={(e)=>{changeHandler(e)}} required />
+          <input className="inputt" type="email" placeholder="Email" value={info.email} onChange={(e)=>{changeHandler(e)}} required />
         </div>
         <button className="buttonn btn-success">Submit</button>
         <div className="form-buttomm">
@@ -90,7 +90,7 @@ function ForgetPassword() {
       loading ? <Processing /> :<span></span>
     }
 </section>
-</>
+</div>
   )
 }
 
