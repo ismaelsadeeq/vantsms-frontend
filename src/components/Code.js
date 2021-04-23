@@ -10,7 +10,9 @@ import '../Stylesheet/forget.css'
 function Code() {
   let history = useHistory();
   const data = {
-    code:''
+    code:'',
+    password:'',
+    confirmPassword:''
   }
   const getLocalStorage = () =>{
     let user = localStorage.getItem('user')
@@ -80,11 +82,11 @@ function Code() {
       }
         <div className="field">
           <label className="labell">Enter the code sent to your Mail</label>
-          <input className="inputt" type="text" placeholder="- - - - -" value={info.code} onChange={(e)=>{changeHandler(e)}} required />
+          <input className="inputt" type="text" placeholder="- - - - -" name="code" value={info.code} onChange={(e)=>{changeHandler(e)}} required />
           <label className="labell">Enter new Password</label>
-          <input className="inputt" type="text" placeholder="Password" value={info.password} onChange={(e)=>{changeHandler(e)}} required />
+          <input className="inputt" type="text" placeholder="Password" name="password" value={info.password} onChange={(e)=>{changeHandler(e)}} required />
           <label className="labell">Confirm new Password</label>
-          <input className="inputt" type="text" placeholder="Confirm Password" value={info.confirmPassword} onChange={(e)=>{changeHandler(e)}} required />
+          <input className="inputt" type="text" placeholder="Confirm Password" name="confirmPassword" value={info.confirmPassword} onChange={(e)=>{changeHandler(e)}} required />
         </div>
         <button className="buttonn btn-success">Submit</button> 
       </form>

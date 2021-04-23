@@ -67,7 +67,7 @@ function ForgetPassword() {
     <section className="container-formm">
 
       <div className="form-headingg">
-        <h3>Recover your password</h3>
+        <h4>Recover your password</h4>
       </div>
     
 
@@ -75,9 +75,9 @@ function ForgetPassword() {
       {
         error ? <VerifyError message={message} />:<div></div>
       }
-        <div className="field">
+      <div className="field">
           <label className="labell">Enter your email address</label>
-          <input className="inputt" type="email" placeholder="Email" value={info.email} onChange={(e)=>{changeHandler(e)}} required />
+          <input className="inputt" type="email" placeholder="Email" name="email" value={info.email} onChange={(e)=>{changeHandler(e)}} required />
         </div>
         <button className="buttonn btn-success">Submit</button>
         <div className="form-buttomm">
