@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import Navbar from './Navbar'
 import Processing from './Processing'
+import VerifyError from '../components/VerifyError'
 import axios from 'axios'
 
 function Login() {
@@ -12,6 +13,8 @@ function Login() {
   }
   const [info, setInfo] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
   function changeHandler (e){
     const property = e.target.name;
     const value = e.target.value;
@@ -30,11 +33,24 @@ function Login() {
       data: info
     }).then(response=>{
       console.log(response.data);
-      let token = response.data.token;
-      let user = response.data.data;
-      localStorage.setItem('token',JSON.stringify(token));
-      localStorage.setItem('user',JSON.stringify(user));
-      history.push('/dashboard')
+      if(response.data.status === 'success'){
+        let token = response.data.token;
+        let user = response.data.data;
+        localStorage.setItem('token',JSON.stringify(token));
+        localStorage.setItem('user',JSON.stringify(user));
+        history.push('/dashboard')
+      }
+      if(response.data === 'No account found'){
+        setMessage('No Account with this email')
+        setLoading(false)
+        setError(true)
+      }
+      if(response.data.message === 'Incorrect passsword'){
+        setMessage('Incorrect Password')
+        setLoading(false)
+        setError(true)
+      }
+      
     })
     .catch(error=>{
       setLoading(false)
@@ -55,7 +71,9 @@ function Login() {
         
 
           <form onSubmit={(e)=>{submitHandler(e)}} className="form-container">
-            
+            {
+               error ? <VerifyError message={message} />:<div></div>
+            }
             <div className="text-danger text-center info-danger" >
             </div>
             

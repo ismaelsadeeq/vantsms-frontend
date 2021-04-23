@@ -11,7 +11,7 @@ function Code() {
   let history = useHistory();
   const data = {
     code:'',
-    password:'',
+    newPassword:'',
     confirmPassword:''
   }
   const getLocalStorage = () =>{
@@ -84,7 +84,7 @@ function Code() {
           <label className="labell">Enter the code sent to your Mail</label>
           <input className="inputt" type="text" placeholder="- - - - -" name="code" value={info.code} onChange={(e)=>{changeHandler(e)}} required />
           <label className="labell">Enter new Password</label>
-          <input className="inputt" type="text" placeholder="Password" name="password" value={info.password} onChange={(e)=>{changeHandler(e)}} required />
+          <input className="inputt" type="text" placeholder="Password" name="newPassword" value={info.password} onChange={(e)=>{changeHandler(e)}} required />
           <label className="labell">Confirm new Password</label>
           <input className="inputt" type="text" placeholder="Confirm Password" name="confirmPassword" value={info.confirmPassword} onChange={(e)=>{changeHandler(e)}} required />
         </div>

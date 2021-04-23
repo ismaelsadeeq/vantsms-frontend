@@ -38,7 +38,7 @@ function ForgetPassword() {
     console.log(info);
     axios({
       method: 'post',
-      url: 'http://localhost:8081/api/v1/auth/verify-email',
+      url: 'http://localhost:8081/api/v1/auth/forgot-password',
       data: info
     }).then(response=>{
       console.log(response.data.message);
