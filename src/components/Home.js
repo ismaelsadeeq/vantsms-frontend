@@ -39,13 +39,13 @@ function Home() {
         <div className="container2" id="features">
           <div className="">
                 <div className="banner-text">
-                    <h2 className="text-center"><span className="text">About Us </span> What makes us<br></br> better?</h2>
+                    <h2 className="text-center"><span className="text">About Us </span> What makes us better?</h2>
                     <p className="text-center lead">Here are the principal reasons to choose us over others.</p>
                 <div className="spacer-20"></div>
               </div>
             </div>
            <div className="row2">
-           <div class="col-md-3 col-sm-6">
+           <div class="">
           <div className="serviceBox">
             <div className="service-icon">
                 <span><i ><FaGlobeAsia /></i></span>
@@ -78,14 +78,14 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="serviceBox darkblue">
-                  <div class="service-icon">
-                      <span><i class="fa fa-briefcase"><FaGlobeAsia /></i></span>
+              <div className="">
+                <div className="serviceBox darkblue">
+                  <div className="service-icon">
+                      <span><i className="fa fa-briefcase"><FaGlobeAsia /></i></span>
                   </div>
-              <div class="service-content">
-                  <h3 class="title"> <span>Customizable</span></h3>
-                  <p class="description">Use our auto-generated OTP and verification feature or generate custom messages and verification flow.</p>
+              <div className="service-content">
+                  <h3 className="title"> <span>Customizable</span></h3>
+                  <p className="description">Use our auto-generated OTP and verification feature or generate custom messages and verification flow.</p>
               </div>
               </div>
           </div>
@@ -144,6 +144,7 @@ function Home() {
               </div>
           </div>
         </div>
+        
         <Footer />
       </div>
    </div>

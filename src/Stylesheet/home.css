@@ -4,6 +4,8 @@
   text-decoration: none;
   list-style: none;
 }
+
+
 /* Container Styling */
 .home {
   padding-top: 4em;
@@ -294,7 +296,7 @@ p.lead {
 	}
 	.banner-text {
 		font-size: 1.5rem;
-		margin: 20px 0;
+		/* margin: 20px 0; */
 		line-height: 35px;
 	}
 }
@@ -323,7 +325,7 @@ p.lead {
     flex-direction: column;
   }
   .banner-text {
-    padding: 1rem;
+    /* padding: 1rem; */
     font-size: 1.5rem;
   }
   .header2 {
@@ -365,6 +367,5 @@ p.lead {
     margin: 0 auto;
     padding-bottom: 5%;
   }
- 
   
 }
