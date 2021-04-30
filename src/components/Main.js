@@ -19,6 +19,8 @@ import Setting from './protected/Setting'
 import Transaction from './protected/Transaction'
 import Support from './protected/Support'
 import Code from './Code'
+import Sms from './protected/Sms'
+import Fund from './protected/Fund'
 
 function Main() {
   return (
@@ -46,6 +48,8 @@ function Main() {
         <Route exact path="/reset-password" component={ResetPassword} />
         <Route exact path="/change-password" component={ChangePassword} />
         <Route exact path="/enter-code" component={Code} />
+        <Route exact path="/sms" component={Sms} />
+        <Route exact path="/fund" component={Fund} />
         <Redirect path="/" />
       </Switch>
     </div> 

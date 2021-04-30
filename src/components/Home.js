@@ -45,17 +45,17 @@ function Home() {
               </div>
             </div>
            <div className="row2">
-           <div class="">
-          <div className="serviceBox">
-            <div className="service-icon">
-                <span><i ><FaGlobeAsia /></i></span>
-            </div>
-            <div className="service-content">
-                <h3 className="title">Budget <span>Pricing</span></h3>
-                <p className="description">From N15/SMS to as low as N10/SMS. Heavy consumer? send us an email to get our super volume discount. </p>
-            </div>
-            </div>
-          </div>
+              <div className="col-md-3 col-sm-6">
+                <div className="serviceBox">
+                  <div className="service-icon">
+                    <span><i ><FaGlobeAsia /></i></span>
+                  </div>
+                  <div className="service-content">
+                    <h3 className="title">Budget <span>Pricing</span></h3>
+                    <p className="description">From N15/SMS to as low as N10/SMS. Heavy consumer? send us an email to get our super volume discount. </p>
+                  </div>
+                </div>
+              </div>
               <div className="col-md-3 col-sm-6">
                   <div className="serviceBox darkgreen">
                     <div className="service-icon">
@@ -66,30 +66,29 @@ function Home() {
                       <p className="description">Verify phone numbers accross all Nigerian telcos, experience 99.9% delivery rate with our robust service .</p>
                     </div>
                   </div>
-              </div>
-              <div className="col-md-3 col-sm-6">
-                <div className="serviceBox blue">
-                  <div className="service-icon">
+                </div>
+                <div className="col-md-3 col-sm-6">
+                  <div className="serviceBox blue">
+                    <div className="service-icon">
                       <span><i className="fa fa-mobile"><FaGlobeAsia /></i></span>
-                  </div>
-                  <div className="service-content">
-                    <h3 className="title">Fast <span>Integration</span></h3>
+                    </div>
+                    <div className="service-content">
+                      <h3 className="title">Fast <span>Integration</span></h3>
                       <p className="description"> Integrating Vantsms verification and transaction APIs is so easy it can be done in a single sprint.</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="">
+              <div className="col-md-3 col-sm-6">
                 <div className="serviceBox darkblue">
                   <div className="service-icon">
                       <span><i className="fa fa-briefcase"><FaGlobeAsia /></i></span>
                   </div>
-              <div className="service-content">
-                  <h3 className="title"> <span>Customizable</span></h3>
-                  <p className="description">Use our auto-generated OTP and verification feature or generate custom messages and verification flow.</p>
+                  <div className="service-content">
+                    <h3 className="title"> <span>Customizable</span></h3>
+                    <p className="description">Use our auto-generated OTP and verification feature or generate custom messages and verification flow.</p>
+                  </div>
+                </div>
               </div>
-              </div>
-          </div>
-          
           </div>
         </div>
         </section>
