@@ -7,8 +7,6 @@ import {useGlobalContext} from '../context/context'
 function Sidebar() {
   const {setRemove} = useGlobalContext()
   const [showLinks,setShowLinks] = useState(false)
-  // const container = useRef(null)
-
 
   const toggleLinks = () => {
     setShowLinks(!showLinks);

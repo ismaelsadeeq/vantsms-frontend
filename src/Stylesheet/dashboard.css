@@ -283,7 +283,7 @@
 	width: 30%;
 }
 .sideBar {
-	position: fixed;
+	/* position: fixed; */
 }
 /* above is the profile styling and below is the dasboard styling */
 .logo-img {
@@ -351,15 +351,58 @@
 	.navig-link {
 		width: 100vw;
 	}
-
+	.dashContainer-nav {
+		visibility: hidden;
+	}
+	.dashContainer-body {
+		flex-direction: column;
+	}
 }
 @keyframes navLinkfade{
-	from{
-			opacity: 0;
-			transform: translateX(50px);
+	from {
+		opacity:0;
+		transform: translateX(50px);
 	}
 	to{
 	opacity: 1;
 	transform: translateX(0px);
+	}
+}
+.dashContainer {
+	display: flex;
+	width: 100%;
+}
+.dashContainer-box {
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(241, 241, 241);
+	width: 100%;
+}
+.avatar {
+	width: 20px;
+	border-radius: 50%;
+	height:19px;
+}
+.dashContainer-body {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding: 3em;
+	
+}
+
+@media (min-width:900px){
+	.dashContainer-nav {
+		padding-top: 1em;
+		padding-left:50em ; 
+		background-color: rgb(255, 255, 255);
+		box-shadow:0px 1px 1px #e2e2e2;
+	}
+	.dashContainer-nav-content {
+		width: 75%;
+		display: flex; 
+		justify-content: space-around;
 	}
 }
