@@ -31,8 +31,8 @@ function Sidebar() {
           const {id,url,text,icon} = link;
           return <li key={id}>
             <a href={url} className="navig-link">
-              <div>{icon}</div>
-              <div>{text}</div>
+              <div className="side-text">{icon}</div>
+              <div  className="side-text">{text}</div>
               
             </a>
           </li>

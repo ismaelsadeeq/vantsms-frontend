@@ -5,6 +5,7 @@ import  '../Stylesheet/verify.css'
 import Navbar from '../components/Navbar'
 import VerifyError from '../components/VerifyError'
 import Processing from './Processing'
+import {url} from './url'
 
 function Verify() {
   let history = useHistory();
@@ -37,7 +38,7 @@ function Verify() {
     console.log(info);
     axios({
       method: 'post',
-      url: 'http://localhost:8081/api/v1/auth/verify-email',
+      url: `${url}/auth/verify-email`,
       data: info
     }).then(response=>{
       console.log(response.data.message);

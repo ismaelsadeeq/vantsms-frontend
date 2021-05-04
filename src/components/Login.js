@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Processing from './Processing'
 import VerifyError from '../components/VerifyError'
 import axios from 'axios'
+import {url} from './url'
 
 function Login() {
   let history = useHistory();
@@ -29,7 +30,7 @@ function Login() {
     console.log(info);
     axios({
       method: 'post',
-      url: 'http://localhost:8081/api/v1/auth/login',
+      url: `${url}/auth/login`,
       data: info
     }).then(response=>{
       console.log(response.data);

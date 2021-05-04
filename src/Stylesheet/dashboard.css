@@ -282,12 +282,13 @@
 .second-box {
 	width: 30%;
 }
-.sideBar {
+.sideBar {     	
 	/* position: fixed; */
 }
 /* above is the profile styling and below is the dasboard styling */
 .logo-img {
 	height: 40px;
+	margin-bottom: .8em;
 }
 .navig a {
   display: flex;
@@ -311,10 +312,14 @@
 .navig a:hover svg {
   color: var(--clr-grey-4);
 }
+.side-text{
+	font-size: 1rem;
+}
 .logout {
 	margin: 1em 3em;
 
 }
+
 @media (max-width:900px){
 	.contain {
 		width: 100%;
@@ -350,6 +355,10 @@
 	}
 	.navig-link {
 		width: 100vw;
+	}
+	.dashContainer-box {
+		/* margin-top: 5em; */
+		/* overflow-x: hidden; */
 	}
 	.dashContainer-nav {
 		visibility: hidden;
@@ -392,6 +401,11 @@
 	padding: 3em;
 	
 }
+.dash-content {
+	padding: 3em;
+	box-shadow:1px 1px 1px #e2e2e2;
+	background-color: #fff;
+}
 
 @media (min-width:900px){
 	.dashContainer-nav {
@@ -405,4 +419,9 @@
 		display: flex; 
 		justify-content: space-around;
 	}
+	.navigi {
+		box-shadow:0px 1px 1px #e2e2e2;
+		/* position: fixed; */
+	}
+
 }

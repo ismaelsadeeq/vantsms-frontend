@@ -5,6 +5,7 @@ import Processing from './Processing'
 import Navbar from '../components/Navbar'
 import VerifyError from '../components/VerifyError'
 import '../Stylesheet/forget.css'
+import {url} from './url';
 
 
 function Code() {
@@ -41,7 +42,7 @@ function Code() {
     console.log(info);
     axios({
       method: 'post',
-      url: 'http://localhost:8081/api/v1/auth/reset-password',
+      url: `${url}/auth/reset-password`,
       data: info
     }).then(response=>{
       console.log(response.data);

@@ -5,6 +5,7 @@ import Processing from './Processing'
 import Navbar from '../components/Navbar'
 import VerifyError from '../components/VerifyError'
 import '../Stylesheet/forget.css'
+import {url} from './url'
 
 function ForgetPassword() {
   let history = useHistory();
@@ -38,7 +39,7 @@ function ForgetPassword() {
     console.log(info);
     axios({
       method: 'post',
-      url: 'http://localhost:8081/api/v1/auth/forgot-password',
+      url: `${url}/auth/forgot-password`,
       data: info
     }).then(response=>{
       console.log(response.data.message);

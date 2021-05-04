@@ -1,11 +1,14 @@
 import React from 'react';
 import {
   FaHome,
-  FaUserFriends,
-  FaFolderOpen,
-  FaCalendarAlt,
-  FaWpforms,
 } from 'react-icons/fa';
+import { MdAccountBox,MdMailOutline,MdHistory } from "react-icons/md";
+import { SiWebmoney } from "react-icons/si";
+import { AiFillFile,AiOutlineSetting } from "react-icons/ai";
+import { BiHelpCircle } from "react-icons/bi";
+
+
+
 export const links = [
   {
     id: 1,
@@ -17,42 +20,42 @@ export const links = [
     id: 2,
     url: '/profile',
     text: 'profile',
-    icon: <FaUserFriends />,
+    icon: <MdAccountBox />,
   },
   {
     id: 3,
     url: '/sms',
     text: 'sendSmS',
-    icon: <FaWpforms />,
+    icon: <MdMailOutline />,
   },
   {
     id: 4,
     url: '/fund',
     text: 'fundAccount',
-    icon: <FaWpforms />,
+    icon: <SiWebmoney />,
   },
   {
     id: 5,
     url: '/transactions',
     text: 'transactions',
-    icon: <FaFolderOpen />,
+    icon: <MdHistory />,
   },
   {
     id: 6,
     url: '/kyc',
     text: 'kyc',
-    icon: <FaCalendarAlt />,
+    icon: <AiFillFile />,
   },
   {
     id: 7,
     url: '/setting',
     text: 'setting',
-    icon: <FaWpforms />,
+    icon: <AiOutlineSetting />,
   },
   {
     id: 8,
     url: '/support',
     text: 'support',
-    icon: <FaWpforms />,
+    icon: <BiHelpCircle />,
   }
 ];

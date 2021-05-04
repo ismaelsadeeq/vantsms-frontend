@@ -4,7 +4,10 @@ import Navbar from "./Navbar"
 import "../Stylesheet/home.css"
 import "react-icons"
 import { FaGlobeAsia } from "react-icons/fa"
-// import { IoRocketSharp } from "react-icons"
+import { MdStayPrimaryPortrait } from "react-icons/md";
+import { MdCardTravel } from "react-icons/md";
+import {FaRocket} from "react-icons/fa"
+
 import phoneImage from "./assets/images/verified2.svg"
 
 function Home() {
@@ -59,7 +62,7 @@ function Home() {
               <div className="col-md-3 col-sm-6">
                   <div className="serviceBox darkgreen">
                     <div className="service-icon">
-                      <span><i ><FaGlobeAsia /></i></span>
+                      <span><i ><FaRocket /></i></span>
                     </div>
                     <div className="service-content">
                       <h3 className="title">Reliable <span>Service</span></h3>
@@ -70,7 +73,7 @@ function Home() {
                 <div className="col-md-3 col-sm-6">
                   <div className="serviceBox blue">
                     <div className="service-icon">
-                      <span><i className="fa fa-mobile"><FaGlobeAsia /></i></span>
+                      <span><i className="fa fa-mobile"><MdStayPrimaryPortrait /></i></span>
                     </div>
                     <div className="service-content">
                       <h3 className="title">Fast <span>Integration</span></h3>
@@ -81,7 +84,7 @@ function Home() {
               <div className="col-md-3 col-sm-6">
                 <div className="serviceBox darkblue">
                   <div className="service-icon">
-                      <span><i className="fa fa-briefcase"><FaGlobeAsia /></i></span>
+                      <span><i className="fa fa-briefcase"><MdCardTravel /></i></span>
                   </div>
                   <div className="service-content">
                     <h3 className="title"> <span>Customizable</span></h3>
@@ -109,7 +112,7 @@ function Home() {
                 <li>Access to APIs</li>
                 <li>Custom Sender ID</li>
               </ul>
-              <a type="button" className="btn btn-lg btn-block btn-outline-primary" href='/register'>Sign up</a>
+              <a type="button" className="btn btn-lg btn-block btn-outline-primary" href="/register">Sign up</a>
               </div>
           </div>
           <div className="body">
@@ -124,7 +127,7 @@ function Home() {
                 <li>Access to APIs</li>
                 <li>Custom Sender ID</li>
               </ul>
-              <a type="button" className="btn btn-lg btn-block btn-primary" href='/register'>Get started</a>
+              <a type="button" className="btn btn-lg btn-block btn-primary" href="/register">Get started</a>
              </div>
           </div>
           <div className="body">
@@ -139,7 +142,7 @@ function Home() {
                   <li>Access to APIs</li>
                   <li>Custom Sender ID</li>
                 </ul>
-                <a type="button" className="btn btn-lg btn-block btn-primary" href='/register'>Signup Now</a>
+                <a type="button" className="btn btn-lg btn-block btn-primary" href="/register">Signup Now</a>
               </div>
           </div>
         </div>

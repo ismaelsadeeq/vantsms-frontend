@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Processing from './Processing'
 import '../Stylesheet/register.css'
 import axios from 'axios'
+import {url} from './url'
 
 function Register() {
   let history = useHistory();
@@ -32,7 +33,7 @@ function Register() {
     console.log(info);
     axios({
       method: 'post',
-      url: 'http://localhost:8081/api/v1/auth/register',
+      url: `${url}/auth/register`,
       data: info
     })
     .then(response=>{
