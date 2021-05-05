@@ -5,8 +5,8 @@ import { FaBars } from 'react-icons/fa';
 import {useGlobalContext} from '../context/context'
 
 function Sidebar() {
-  const {setRemove} = useGlobalContext()
-  const [showLinks,setShowLinks] = useState(false)
+  const {setRemove,showLinks,setShowLinks} = useGlobalContext()
+ 
 
   const toggleLinks = () => {
     setShowLinks(!showLinks);

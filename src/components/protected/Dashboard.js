@@ -2,10 +2,17 @@ import React, {useState} from 'react'
 import Sidebar from './Sidebar'
 import { FaBars } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
-
+import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
+import {FaMoneyBill} from 'react-icons/fa'
+import {BiArchiveOut,BiUserCheck} from 'react-icons/bi'
+import {RiNumbersLine} from 'react-icons/ri'
+import {IoIosHelpCircleOutline} from 'react-icons/io'
+
+
 
 function Dashboard() {
+  const {showLinks} = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
 
 
@@ -22,10 +29,10 @@ function Dashboard() {
           <p>0.00 Sms balance</p>
           </div>
         </div>
-        <div className="dashContainer-body">
+        <div className={`${showLinks?"hid dashContainer-body":"dashContainer-body"}`}>
           <div className="dash-content">
            <div>
-            <FaBars />
+            <FaMoneyBill />
            </div>
            <p>
             Account Balance
@@ -35,12 +42,60 @@ function Dashboard() {
            </h4>
           </div >
           <div className="dash-content">
-            hello
-          </div>
+           <div>
+            <BiArchiveOut />
+           </div>
+           <p>
+            Kyc Status
+           </p>
+           <h4>
+             uploaded
+           </h4>
+          </div >
           <div className="dash-content">
-            hello
-          </div>
-        
+           <div>
+            <RiNumbersLine />
+           </div>
+           <p>
+            number sent sms
+           </p>
+           <h4>
+              0
+           </h4>
+          </div >
+          <div className="dash-content">
+           <div>
+            <BiUserCheck />
+           </div>
+           <p>
+            Account Type
+           </p>
+           <h4>
+              Hobbiyist
+           </h4>
+          </div >
+          <div className="dash-content">
+           <div>
+            <IoIosHelpCircleOutline />
+           </div>
+           <p>
+           Pricing
+           </p>
+           <h4>
+             12N/SMS
+           </h4>
+          </div >
+          <div className="dash-content">
+           <div>
+            <IoIosHelpCircleOutline />
+           </div>
+           <p>
+            Need Support
+           </p>
+           <button className="btn btn-succes">
+            Send a message 
+           </button>
+          </div >
         </div>
      </div>
     </div>
