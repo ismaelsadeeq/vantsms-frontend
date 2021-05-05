@@ -46,12 +46,12 @@ export const links = [
     text: 'kyc',
     icon: <AiFillFile />,
   },
-  {
-    id: 7,
-    url: '/setting',
-    text: 'setting',
-    icon: <AiOutlineSetting />,
-  },
+  // {
+  //   id: 7,
+  //   url: '/setting',
+  //   text: 'setting',
+  //   icon: <AiOutlineSetting />,
+  // },
   {
     id: 8,
     url: '/support',

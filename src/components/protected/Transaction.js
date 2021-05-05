@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import { CgProfile } from 'react-icons/cg';
 import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
-import '../../Stylesheet/fund.css'
+import '../../Stylesheet/transaction.css'
 
 
 function Transaction() {
@@ -23,7 +23,43 @@ function Transaction() {
           </div>
         </div>
         <div className="margin"></div>
-       
+        <div className="transaction">
+          <div>
+            <div className="transaction-content grey">
+              <p>Date</p>
+              <p>Type</p>
+              <p>Amount</p>
+            </div>
+            <div className="transaction-content">
+              <p>May 5</p>
+              <p>Credit</p>
+              <p>2000</p>
+            </div>
+            <div className="transaction-content">
+              <p>April 1</p>
+              <p>Debit</p>
+              <p>1</p>
+            </div>
+            <div className="transaction-content">
+              <p>April 4</p>
+              <p>Debit</p>
+              <p>1</p>
+            </div>
+            <div className="transaction-content">
+              <p>April 6</p>
+              <p>Credit</p>
+              <p>600</p>
+            </div>
+            <div className="transaction-btn">
+            <button className="view-btn btn btn-danger">
+              back
+            </button>
+            <button className="view-btn btn ">
+              next
+            </button>
+            </div>
+          </div>
+        </div>
      </div>
     </div>
   )

@@ -56,7 +56,7 @@ function Dashboard() {
             <RiNumbersLine />
            </div>
            <p>
-            number sent sms
+            sent messages
            </p>
            <h4>
               0
@@ -81,7 +81,7 @@ function Dashboard() {
            Pricing
            </p>
            <h4>
-             12N/SMS
+             12.00N/SMS
            </h4>
           </div >
           <div className="dash-content">

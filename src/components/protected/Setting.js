@@ -23,7 +23,9 @@ function Setting() {
             </div>
           </div>
           <div className="margin"></div>
-         
+         <div className="setting">
+          
+         </div>
        </div>
       </div>
   )
