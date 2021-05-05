@@ -23,7 +23,7 @@ function Fund() {
           </div>
         </div>
         <div className="margin"></div>
-       <div className="fund">
+       <div className={`${showLinks?"hid":"fund"}`} >
          <div className="group">
          <h3 className="text-me">Account Number: 1234567890</h3>
           <h3  className="text-me">Account Name: Abubakar Sadiq Ismail</h3>

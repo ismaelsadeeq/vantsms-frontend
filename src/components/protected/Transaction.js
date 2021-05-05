@@ -23,7 +23,7 @@ function Transaction() {
           </div>
         </div>
         <div className="margin"></div>
-        <div className="transaction">
+        <div className={`${showLinks?"hid":"transaction"}`}>
           <div>
             <div className="transaction-content grey">
               <p>Date</p>

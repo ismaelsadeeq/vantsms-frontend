@@ -24,7 +24,7 @@ function Kyc() {
             </div>
           </div>
           <div className="margin"></div>
-         <div className="kyc">
+         <div className={ `${showLinks?"hid":"kyc"}`}>
           <div>
             <h4 className="text-me">Upload Your <span className="text"> Corporate Affairs Certificate</span> for Account Validation</h4>
             <form>

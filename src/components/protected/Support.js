@@ -24,7 +24,7 @@ function Support() {
           </div>
         </div>
         <div className="margin"></div>
-        <div className="kyc">
+        <div className={ `${showLinks?"hid":"kyc"}`}>
             <h4 className="text-me">Do you have something in mind you think we should know</h4>
             <p>feel free to reach out</p>
             <form>
