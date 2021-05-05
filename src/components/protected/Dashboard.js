@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import Sidebar from './Sidebar'
-import { FaBars } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
@@ -21,12 +20,12 @@ function Dashboard() {
     <div className="">
         <Sidebar />
     </div>
-    <div className="dashContainer-box">
+    <div className="dashContainer-box grey">
         <div className="dashContainer-nav">
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
           <p>Abubakar</p>
-          <p>0.00 Sms balance</p>
+          <p>0.00</p>
           </div>
         </div>
         <div className={`${showLinks?"hid dashContainer-body":"dashContainer-body"}`}>

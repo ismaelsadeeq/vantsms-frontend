@@ -1,0 +1,29 @@
+.sms-body {
+  margin-top:2rem;
+  background-color: #fff;
+  padding: 2rem;
+  display: flex;
+  width: 85%;
+  height: 80%;
+  margin: 0 auto;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+}
+
+.view-btn {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+  color: #d23edd;
+}
+
+@media (max-width:900px){
+  .sms-body {
+    flex-direction: column;
+  }
+}
+@media (min-width:900px){
+  .sms-body {
+    justify-content: space-between;
+  }
+  .margin{
+    margin-top: 2rem;
+  }
+}

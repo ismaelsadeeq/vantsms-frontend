@@ -40,7 +40,7 @@ function Sidebar() {
       }
       <div className="logout">
         <form>
-          <button type="button" className="btn btn-danger">Logout</button>
+          <button type="button" className="view-btn btn btn-danger">Logout</button>
         </form>  
       </div>
       </div>

@@ -295,7 +295,7 @@
   align-items: center;
   font-size: 1.25rem;
   text-transform: capitalize;
-  padding: 1rem 1.5rem;
+  padding: .9rem 1.5rem;
   color: var(--clr-grey-3);
   letter-spacing: var(--spacing);
 }
@@ -336,11 +336,14 @@
 	}
 	.logo-2 {
 		overflow-x: hidden;
-		width: 95%;
+		width: 100%;
 		display: flex;
+		padding: 0 .5em;
 		justify-content: space-between;
 		margin: 0 auto;
+		background-color: #fff;
 	}
+
 	.navigi {
 		position: absolute;
     right: 46vh;
@@ -357,14 +360,22 @@
 		width: 100vw;
 	}
 	.dashContainer-box {
-		/* margin-top: 5em; */
+		/* margin-top: 2	em; */
 		/* overflow-x: hidden; */
 	}
 	.dashContainer-nav {
+		height: 2em;
 		visibility: hidden;
 	}
 	.dashContainer-body {
 		flex-direction: column;
+	}
+	.dashContainer-nav p {
+		margin: 0;
+	}
+	.dash-content {
+		padding: 1rem;
+		font-size: 1.7rem;
 	}
 }
 @keyframes navLinkfade{
@@ -385,8 +396,11 @@
 	height: auto;
 	display: flex;
 	flex-direction: column;
-	background-color: rgb(241, 241, 241);
+	
 	width: 100%;
+}
+.grey {
+	background-color: rgb(241, 241, 241);
 }
 .avatar {
 	width: 20px;
@@ -398,13 +412,14 @@
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	padding: 3em;
+	padding: 2.8em;
 	
 }
 .dash-content {
 	text-align: center;
 	padding: 3rem;
 	margin: .7rem;
+	border-radius: 3%;
 	box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
 	background-color: #fff;
 }
@@ -412,13 +427,16 @@
 	margin-bottom:.5rem ;
 }
 .dash-content button {
-	font-weight: 700;
-    padding: .75rem 1.5rem;
+	font-weight: 500;
     font-size: .875rem;
     transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
     transition-duration: .3s;
     transition-timing-function: linear;
-    letter-spacing: .05em;
+		letter-spacing: .05em;
+		color: #d23edd;
+}
+.dash-content h4 {
+	color: #d23edd;
 }
 .icon-circle {
 	border-radius: 9999px;
@@ -426,8 +444,9 @@
 	height: 3rem;
 	background-color: #ebf8ff;
 }
+
 @media (min-width:900px){
-	body{
+	.dashContainer .sideBar {
 		overflow-y: hidden;
 	}
 	.dashContainer-nav {
@@ -448,7 +467,9 @@
 	.dash-content {
 		width: 25%;
 		font-size: 1.4rem;
-
+	}
+	.dashContainer-box {
+		height: 100vh;
 	}
 
 }

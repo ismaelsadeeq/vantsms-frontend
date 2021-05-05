@@ -1,0 +1,38 @@
+.fund  {
+  display: flex;
+  margin: 0 auto;
+}
+
+@media (max-width:900px){
+  .fund {
+    flex-direction: column;
+    margin-top:2.8rem;
+    padding: 1rem;
+    width: auto;
+    height: 100vh;
+    background-color: rgb(241, 241, 241);;
+  }
+  .text-me {
+    padding: .5rem 0;
+    font-weight: 400;
+  }
+}
+@media (min-width:900px){
+  .group {
+    width: 50%;
+    padding: 6rem 0;
+  }
+  .fund {
+    height: 70%;
+    width: 80%;
+  }
+  .fund-img {
+    width: 50%;
+  }
+  .text-me {
+    padding: .5rem 0;
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+ 
+}

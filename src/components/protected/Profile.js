@@ -4,6 +4,8 @@ import axios from 'axios'
 import '../../Stylesheet/dashboard.css'
 import profile from '../assets/images/me.jpg'
 import Sidebar from './Sidebar'
+import { CgProfile } from 'react-icons/cg';
+import prof from '../assets/images/me.jpg'
 import {useGlobalContext} from '../context/context'
 
 function Profile() {
@@ -17,7 +19,8 @@ function Profile() {
       return []
     }
   }
-  const {remove} = useGlobalContext();
+  const [profilePic,setProfilePic] = useState(false)
+  const {remove,showLinks} = useGlobalContext();
   const [store,setStore] = useState(getLocalStorage())
   const [about,setAbout] = useState(true)
   const [api,setApi] = useState(false)
@@ -66,7 +69,7 @@ function Profile() {
     <div className="box">
         <Sidebar className="second-box" />
     <section className={`${remove?"hid":"contain"}`}>
-    <div className="contain emp-profile">
+    <div className="contain emp-profile"> 
                 <div className=" first ">
                     <div className="profile-img">
                         <img src={profile} alt=""/>

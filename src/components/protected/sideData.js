@@ -22,12 +22,12 @@ export const links = [
     text: 'profile',
     icon: <MdAccountBox />,
   },
-  {
-    id: 3,
-    url: '/sms',
-    text: 'sendSmS',
-    icon: <MdMailOutline />,
-  },
+  // {
+  //   id: 3,
+  //   url: '/sms',
+  //   text: 'sendSmS',
+  //   icon: <MdMailOutline />,
+  // },
   {
     id: 4,
     url: '/fund',
@@ -36,7 +36,7 @@ export const links = [
   },
   {
     id: 5,
-    url: '/transactions',
+    url: '/transaction',
     text: 'transactions',
     icon: <MdHistory />,
   },
