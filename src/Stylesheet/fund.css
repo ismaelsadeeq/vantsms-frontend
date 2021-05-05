@@ -2,6 +2,9 @@
   display: flex;
   margin: 0 auto;
 }
+.fund p {
+  margin-bottom: 0;
+}
 
 @media (max-width:900px){
   .fund {
@@ -19,15 +22,15 @@
 }
 @media (min-width:900px){
   .group {
-    width: 50%;
-    padding: 6rem 0;
+    width: 48%;
+    padding: 1rem 0;
   }
   .fund {
     height: 70%;
     width: 80%;
   }
   .fund-img {
-    width: 50%;
+    width: 52%;
   }
   .text-me {
     padding: .5rem 0;

@@ -28,6 +28,9 @@ function Fund() {
          <h3 className="text-me">Account Number: 1234567890</h3>
           <h3  className="text-me">Account Name: Abubakar Sadiq Ismail</h3>
           <h3  className="text-me">Bank: Moniepoint</h3>
+          <h3 className="text-me">1k to 100k - 15N per SMS unit</h3>
+          <h3 className="text-me">101k to 999k - 12.5N per SMS unit</h3>
+          <h3 className="text-me">Above 1M Naira - 10N per SMS unit</h3>
           <p className="lead">to fund your account simply transfer or deposit money<b></b> to the above account</p>
          </div>
          <div className="fund-img">
