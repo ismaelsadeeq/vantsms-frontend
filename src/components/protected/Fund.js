@@ -14,7 +14,7 @@ function Fund() {
     <div className="">
         <Sidebar />
     </div>
-    <div className="dashContainer-box grey">
+    <div className="dashContainer-box">
         <div className="dashContainer-nav">
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}

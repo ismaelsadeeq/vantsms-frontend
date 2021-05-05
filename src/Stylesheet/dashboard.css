@@ -396,11 +396,8 @@
 	height: auto;
 	display: flex;
 	flex-direction: column;
-	
-	width: 100%;
-}
-.grey {
 	background-color: rgb(241, 241, 241);
+	width: 100%;
 }
 .avatar {
 	width: 20px;
