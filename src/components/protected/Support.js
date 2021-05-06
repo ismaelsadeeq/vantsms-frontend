@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import Sidebar from './Sidebar'
 import TransactionModal from "./TransactionModal"
 import { CgProfile } from 'react-icons/cg';
@@ -8,7 +8,7 @@ import '../../Stylesheet/kyc.css'
 
 
 function Support() {
-  const {showLinks,openModal} = useGlobalContext()
+  const {showLinks,openModal,account} = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
   return (
     <div className="dashContainer">
@@ -20,7 +20,7 @@ function Support() {
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
           <p>Abubakar</p>
-          <p>0.00</p>
+          <p>{account.balance}</p>
           </div>
         </div>
         <div className="margin"></div>

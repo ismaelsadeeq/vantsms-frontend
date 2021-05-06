@@ -3,11 +3,12 @@ import {links} from './sideData'
 import logo from '../assets/images/verifier_logo.png'
 import { FaBars } from 'react-icons/fa';
 import {useGlobalContext} from '../context/context'
+import { useHistory } from "react-router-dom";
 
 function Sidebar() {
+  let history = useHistory();
   const {setRemove,showLinks,setShowLinks} = useGlobalContext()
  
-
   const toggleLinks = () => {
     setShowLinks(!showLinks);
     if(!showLinks){
@@ -17,6 +18,11 @@ function Sidebar() {
     }
     
   };
+  const logOut = () =>{
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    history.push("/login");
+  }
   return (
     <div className="sideBar">
       <div className="logo-2">
@@ -40,7 +46,7 @@ function Sidebar() {
       }
       <div className="logout">
         <form>
-          <button type="button" className="view-btn btn btn-danger">Logout</button>
+          <button type="button" className="view-btn btn btn-danger" onClick={logOut}>Logout</button>
         </form>  
       </div>
       </div>

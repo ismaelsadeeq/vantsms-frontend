@@ -20,7 +20,7 @@ function Profile() {
     }
   }
   const [profilePic,setProfilePic] = useState(false)
-  const {remove,showLinks} = useGlobalContext();
+  const {remove,account,showLinks} = useGlobalContext();
   const [store,setStore] = useState(getLocalStorage())
   const [about,setAbout] = useState(true)
   const [api,setApi] = useState(false)
@@ -28,43 +28,7 @@ function Profile() {
     setAbout(!about);
     setApi(!api)
   };
-//   function changeHandler (e){
-//     const property = e.target.name;
-//     const value = e.target.value;
-//     setInfo(ev => ({
-//       ...ev,
-//       [property] : value,
-//     }))  
-//   }
-//   function submitHandler(e) {
-//     e.preventDefault();
-//     setLoading(true);
-//     console.log(info);
-//     axios({
-//       method: 'post',
-//       url: 'http://localhost:8081/api/v1/auth/reset-password',
-//       data: info
-//     }).then(response=>{
-//       console.log(response.data);
-//       if(response.data === 'password changed'){
-//         history.push('/login')
-//       }
-//       if(response.data === 'password did not match'){
-//         setMessage('Password and confirm password do not match')
-//         setLoading(false)
-//         setError(true)
-//       }
-//       if(response.data === 'incorrect pin'){
-//         setMessage('Incorrect Code')
-//         setLoading(false)
-//         setError(true)
-//       }
-//     })
-//     .catch(error=>{
-//       setLoading(false);
-//       console.log(error);
-//     })
-//   }  
+
   return (
     <div className="box">
         <Sidebar className="second-box" />
@@ -93,7 +57,7 @@ function Profile() {
                                     ask4ismailsadiq@gmail.com
                                     {/* {{user?.email}} */}
                                 </h6>
-                                <p className="proile-rating">SMS Balance : <span className="mr-4">2334</span> <a className="btn btn-small btn-success btn-outline"> Top Up Now</a> </p>
+                                <p className="proile-rating">SMS Balance : <span className="mr-4">{account.balance}</span> <a className="btn btn-small btn-success btn-outline"> Top Up Now</a> </p>
                         <ul className="nav nav-tabs" id="myTab" role="tablist">
                             <li className="nav-item">
                                 <button  onClick={()=>{handleToggle()}} className="nav-link" id="home-tab" data-toggle="tab"  role="tab" aria-controls="home" aria-selected="true">About</button>

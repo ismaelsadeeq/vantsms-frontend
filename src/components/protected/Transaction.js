@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import Sidebar from './Sidebar'
 import { CgProfile } from 'react-icons/cg';
 import {useGlobalContext} from '../context/context'
@@ -7,7 +7,7 @@ import '../../Stylesheet/transaction.css'
 
 
 function Transaction() {
-  const {showLinks} = useGlobalContext()
+  const {showLinks,account} = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
   return (
     <div className="dashContainer">
@@ -19,7 +19,7 @@ function Transaction() {
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
           <p>Abubakar</p>
-          <p>0.00</p>
+          <p>{account.balance}</p>
           </div>
         </div>
         <div className="margin"></div>

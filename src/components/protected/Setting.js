@@ -7,7 +7,7 @@ import '../../Stylesheet/fund.css'
 
 
 function Setting() {
-  const {showLinks} = useGlobalContext()
+  const {account,showLinks} = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
   return (
     <div className="dashContainer">
@@ -19,7 +19,7 @@ function Setting() {
             <div className="dashContainer-nav-content">
             {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
             <p>Abubakar</p>
-            <p>0.00</p>
+            <p>{account.balance}</p>
             </div>
           </div>
           <div className="margin"></div>

@@ -27,19 +27,17 @@ function Login() {
   function submitHandler (e) {
     e.preventDefault();
     setLoading(true);
-    console.log(info);
     axios({
       method: 'post',
       url: `${url}/auth/login`,
       data: info
     }).then(response=>{
-      console.log(response.data);
       if(response.data.status === 'success'){
         let token = response.data.token;
         let user = response.data.data;
         localStorage.setItem('token',JSON.stringify(token));
         localStorage.setItem('user',JSON.stringify(user));
-        history.push('/dashboard')
+        history.push('/dashboard');
       }
       if(response.data === 'No account found'){
         setMessage('No Account with this email')
