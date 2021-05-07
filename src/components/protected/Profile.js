@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
 import '../../Stylesheet/dashboard.css'
@@ -6,29 +6,23 @@ import profile from '../assets/images/me.jpg'
 import Sidebar from './Sidebar'
 import { CgProfile } from 'react-icons/cg';
 import prof from '../assets/images/me.jpg'
-import {useGlobalContext} from '../context/context'
+import { useGlobalContext } from '../context/context'
 
 function Profile() {
 
   let history = useHistory();
-  const getLocalStorage = () =>{
-    let user = localStorage.getItem('user')
-    if(user){
-      return JSON.parse(localStorage.getItem('user'))
-    } else{
-      return []
-    }
-  }
+
   const [profilePic,setProfilePic] = useState(false)
-  const {remove,account,showLinks} = useGlobalContext();
-  const [store,setStore] = useState(getLocalStorage())
+  const {remove,account,showLinks,user,token} = useGlobalContext();
   const [about,setAbout] = useState(true)
   const [api,setApi] = useState(false)
   const handleToggle = () => {
     setAbout(!about);
     setApi(!api)
   };
-
+  useEffect(() => {
+    console.log(user)
+  }, [])
   return (
     <div className="box">
         <Sidebar className="second-box" />
@@ -51,6 +45,9 @@ function Profile() {
                     <div className="profile-head">
                                 <h5 className="rem">
                                     Sadeeq ismael
+                                    {
+                                        user.firstname 
+                                    }
                                     {/* {{user?.firstname}} {{user?.lastname}} */}
                                 </h5>
                                 <h6 className="rem2">

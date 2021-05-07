@@ -442,9 +442,13 @@
 		letter-spacing: .05em;
 		color: #d23edd;
 }
-.dash-content h4 {
+.dash-content h4  {
 	color: #d23edd;
 }
+.dash-content a  {
+	color: #d23edd;
+}
+
 .icon-circle {
 	border-radius: 9999px;
 	width: 3rem;

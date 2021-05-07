@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react'
-
+import React, { useState, useContext } from 'react';
+const helpers = require("../protected/helpers");
 const AppContext = React.createContext();
 
 export const AppProvider = ({children}) =>{
   let userData = 
-  {"id":"",
-  "email":"",
+  {
+    "id":"",
+    "email":"",
     "firstname":"",
     "lastname":"",
     "phoneNumber":"",
@@ -15,15 +16,13 @@ export const AppProvider = ({children}) =>{
     "isCorporate":false,
     "isVerified":true,
   }
-  let accountData = {
-    "balance":""
-  }
+ 
   const [remove, setRemove] = useState("");
   const [showLinks,setShowLinks] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [token,setToken] = useState("");
   const [user,setUser] = useState(userData);
-  const [account,setAccount] = useState(accountData);
+  const [account,setAccount] = useState("");
   const [transactions,setTransactions] = useState([]);
   const [kycStatus,setKycStatus] = useState(false)
 
@@ -32,6 +31,12 @@ export const AppProvider = ({children}) =>{
   }
   function closeModal(){
     setIsModalOpen(false)
+  }
+  const setTheToken = () =>{
+    setToken(helpers.getToken());
+    if(helpers.getToken() == null){
+      history.push("/login")
+    }
   }
   return <AppContext.Provider
   value={{
@@ -49,7 +54,9 @@ export const AppProvider = ({children}) =>{
     account,
     setAccount,
     transactions,
-    setTransactions
+    setTransactions,
+    kycStatus,
+    setKycStatus
   }}
   >{children} </AppContext.Provider>
 }

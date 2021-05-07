@@ -7,7 +7,7 @@ import '../../Stylesheet/fund.css'
 import phone from "../assets/images/verified2.svg"
 
 function Fund() {
-  const {showLinks,account} = useGlobalContext()
+  const {showLinks,account,user} = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
   return (
     <div className="dashContainer">
@@ -18,8 +18,8 @@ function Fund() {
         <div className="dashContainer-nav">
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
-          <p>Abubakar</p>
-          <p>{account.balance}</p>
+          <p>{user.fistname}</p>
+          <p>{account}</p>
           </div>
         </div>
         <div className="margin"></div>

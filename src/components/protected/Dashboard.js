@@ -10,24 +10,10 @@ import {RiNumbersLine} from 'react-icons/ri'
 import {IoIosHelpCircleOutline} from 'react-icons/io'
 import axios from 'axios';
 import {url} from '../url';
+const helpers = require('./helpers');
 
 
-const getToken = () =>{
-  let list = localStorage.getItem('token')
-  if(list){
-    return JSON.parse(localStorage.getItem('token'))
-  } else{
-    return null
-  }
-}
-const getUser = () =>{
-  let list = localStorage.getItem('user')
-  if(list){
-    return JSON.parse(localStorage.getItem('user'))
-  } else{
-    return []
-  }
-}
+
 function Dashboard() {
   let history = useHistory();
   const {
@@ -37,34 +23,47 @@ function Dashboard() {
     token,
     setToken,
     account,
-    setAccount
+    setAccount,
+    kycStatus,
+    setKycStatus
   } = useGlobalContext();
-  const [profilePic,setProfilePic] = useState(false)
-  const setTheToken = () =>{
-    setToken(getToken);
-    if(token == null){
-      history.push("/login")
-    }
-  }
+  const [profilePic,setProfilePic] = useState(false);
+  
   const setTheUser = () =>{
-    setUser(getUser);
+    setUser(helpers.getUser());
+    console.log(user);
   }
   const setAccountBalance = ()=>{
     axios({
-      method: 'get',
+      method: 'GET',
       url: `${url}/account`,
       headers:{
         Authorization:`Bearer ${token}`,
       }
-    }).then(response=>{
-      console.log(response.data);
+    }).then(response => {
       if(response.data){
         let smsBalance = response.data.smsBalance
-        setAccount(balance => ({
-          ...balance,
-          ["balance"]:smsBalance
-        }))
-        console.log(account)
+        return setAccount(smsBalance)
+      }
+    })
+    .catch(error=>{
+      console.log(error); 
+    })
+  }
+  const setTheKycStatus = ()=>{
+    axios({
+      method: 'GET',
+      url: `${url}/kyc`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+    }).then(response => {
+      console.log(response.data.data);
+      if(response.data.data === null){
+        return setKycStatus(false);
+      }
+      if(response.data.data === !null){
+        return setKycStatus(true);
       }
     })
     .catch(error=>{
@@ -72,10 +71,13 @@ function Dashboard() {
     })
   }
   useEffect(() => {
-    setTheToken();
-    setTheUser();
     setAccountBalance();
-  }, [])
+    setTheKycStatus();
+    setTheUser();
+    setTheToken();
+    console.log(user.firstname)
+    console.log(account)
+  }, [token])
 
   return (
     <div className="dashContainer">
@@ -86,8 +88,8 @@ function Dashboard() {
         <div className="dashContainer-nav">
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
-          <p>Abubakar</p>
-          <p>{account.balance}</p>
+          <p>{user.firstname}</p>
+          <p>{account}</p>
           </div>
         </div>
         <div className={`${showLinks?"hid dashContainer-body":"dashContainer-body"}`}>
@@ -99,7 +101,7 @@ function Dashboard() {
             Account Balance
            </p>
            <h4>
-           {account.balance}
+           {account}
            </h4>
           </div >
           <div className="dash-content">
@@ -109,19 +111,26 @@ function Dashboard() {
            <p>
             Kyc Status
            </p>
-           <h4>
-             uploaded
-           </h4>
+           <div>
+            {
+            kycStatus? <h4>uploaded</h4>:
+             
+                <h4>not uploaded
+                <a href="/kyc">  upload</a>
+                </h4>
+                
+            }
+           </div>
           </div >
           <div className="dash-content">
            <div>
             <RiNumbersLine />
            </div>
            <p>
-            sent messages
+            API key
            </p>
            <h4>
-              0
+           <a href="/kyc">Go to profile</a>
            </h4>
           </div >
           <div className="dash-content">
@@ -131,20 +140,24 @@ function Dashboard() {
            <p>
             Account Type
            </p>
-           <h4>
-              Hobbiyist
-           </h4>
+           <div>
+              {
+                user.isCorporate?<h4>Enterprise</h4>:<h4>Hobbyist</h4>
+              }
+           </div>
           </div >
           <div className="dash-content">
            <div>
-            <IoIosHelpCircleOutline />
+            <RiNumbersLine />
            </div>
            <p>
            Pricing
            </p>
-           <h4>
-             12.00N/SMS
-           </h4>
+           <div>
+              {
+                user.isCorporate?<h4>10N/SMS</h4>:<h4>12.5N/SMS</h4>
+              }
+           </div>
           </div >
           <div className="dash-content">
            <div>
