@@ -1,14 +1,40 @@
 import React, {useState,useEffect} from 'react'
 import Sidebar from './Sidebar'
+import { useHistory } from "react-router-dom";
 import { CgProfile } from 'react-icons/cg';
 import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
 import '../../Stylesheet/fund.css'
 import phone from "../assets/images/verified2.svg"
+const helpers = require('./helpers');
 
 function Fund() {
-  const {showLinks,account,user} = useGlobalContext()
+  let history = useHistory();
+  const {
+    showLinks,
+    account,
+    user,
+    token,
+    setToken,
+    setTheUser,
+    setTheKycStatus,
+    setAccountBalance,
+  } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
+  const setTheToken = () =>{
+    setToken(helpers.getToken());
+    if(helpers.getToken() == null){
+      history.push("/login")
+    }
+  }
+  useEffect(() => {
+    setAccountBalance();
+    setTheKycStatus();
+    setTheUser();
+    setTheToken();
+    console.log(user.firstname)
+    console.log(account)
+  }, [token])
   return (
     <div className="dashContainer">
     <div className="">
@@ -18,15 +44,15 @@ function Fund() {
         <div className="dashContainer-nav">
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
-          <p>{user.fistname}</p>
+          <p>{user.firstname}</p>
           <p>{account}</p>
           </div>
         </div>
         <div className="margin"></div>
        <div className={`${showLinks?"hid":"fund"}`} >
          <div className="group">
-         <h3 className="text-me">Account Number: 1234567890</h3>
-          <h3  className="text-me">Account Name: Abubakar Sadiq Ismail</h3>
+         <h3 className="text-me">Account Number: {user.accountNumber}</h3>
+          <h3  className="text-me">Account Name: {user.firstname} {user.lastname}</h3>
           <h3  className="text-me">Bank: Moniepoint</h3>
           <h3 className="text-me">1k to 100k - 15N per SMS unit</h3>
           <h3 className="text-me">101k to 999k - 12.5N per SMS unit</h3>

@@ -1,28 +1,51 @@
 import React, {useState,useEffect} from 'react'
 import { useHistory } from "react-router-dom";
-import axios from 'axios'
 import '../../Stylesheet/dashboard.css'
 import profile from '../assets/images/me.jpg'
 import Sidebar from './Sidebar'
 import { CgProfile } from 'react-icons/cg';
 import prof from '../assets/images/me.jpg'
 import { useGlobalContext } from '../context/context'
+const helpers = require('./helpers');
 
 function Profile() {
 
   let history = useHistory();
 
   const [profilePic,setProfilePic] = useState(false)
-  const {remove,account,showLinks,user,token} = useGlobalContext();
+  const {
+    remove,
+    account,
+    showLinks,
+    user,
+    token,
+    setToken,
+    setTheUser,
+    setTheKycStatus,
+    setAccountBalance,
+  } = useGlobalContext();
   const [about,setAbout] = useState(true)
   const [api,setApi] = useState(false)
   const handleToggle = () => {
     setAbout(!about);
     setApi(!api)
   };
+
+  const setTheToken = () =>{
+    setToken(helpers.getToken());
+    if(helpers.getToken() == null){
+      history.push("/login")
+    }
+  }
+
   useEffect(() => {
-    console.log(user)
-  }, [])
+    setAccountBalance();
+    setTheKycStatus();
+    setTheUser();
+    setTheToken();
+    console.log(user.firstname)
+    console.log(account)
+  }, [token])
   return (
     <div className="box">
         <Sidebar className="second-box" />
@@ -44,17 +67,12 @@ function Profile() {
                 <div className="col-md-6">
                     <div className="profile-head">
                                 <h5 className="rem">
-                                    Sadeeq ismael
-                                    {
-                                        user.firstname 
-                                    }
-                                    {/* {{user?.firstname}} {{user?.lastname}} */}
+                                {user.firstname} {user.lastname}
                                 </h5>
                                 <h6 className="rem2">
-                                    ask4ismailsadiq@gmail.com
-                                    {/* {{user?.email}} */}
+                                    {user.email}
                                 </h6>
-                                <p className="proile-rating">SMS Balance : <span className="mr-4">{account.balance}</span> <a className="btn btn-small btn-success btn-outline"> Top Up Now</a> </p>
+                                <p className="proile-rating">SMS Balance : <span className="mr-4">{account}</span> <a className="btn btn-succes" href="/fund">Top Up Now</a> </p>
                         <ul className="nav nav-tabs" id="myTab" role="tablist">
                             <li className="nav-item">
                                 <button  onClick={()=>{handleToggle()}} className="nav-link" id="home-tab" data-toggle="tab"  role="tab" aria-controls="home" aria-selected="true">About</button>
@@ -80,8 +98,9 @@ function Profile() {
                                             <label>Account Type</label>
                                         </div>
                                         <div className="col-md-6">
-                                            <p >Company/organization</p>
-                                            {/* <p>Individual</p> */}
+                                        {
+                                            user.isCorporate?<p>Enterprise</p>:<p>Hobbyist</p>
+                                        }
                                         </div>
                                     </div>
                                     <div className="row">
@@ -89,8 +108,9 @@ function Profile() {
                                             <label>Verification</label>
                                         </div>
                                         <div className="col-md-6">
-                                            <p>Verified</p>
-                                            {/* <p> Unverified <br /> Verify Now</p> */}
+																				{
+                													user.isVerified?<p>Verified</p>:<p>Not verified</p>
+              														}
                                         </div>
                                     </div>
                                     <div className="roww">
@@ -98,8 +118,7 @@ function Profile() {
                                             <label>Email</label>
                                         </div>
                                         <div className="col-md-6">
-                                            <p>ask4ismailsadiq@gmail.com</p>
-                                            {/* <p>{{user?.email}}</p> */}
+                                            <p> {user.email}</p>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -107,27 +126,25 @@ function Profile() {
                                             <label>Phone</label>
                                         </div>
                                         <div className="col-md-6">
-                                            <p>08131354171</p>
-                                            {/* <p>{{user?.phonenumber}}</p> */}
+                                            <p> {user.phoneNumber}</p>
                                         </div>
                                     </div>
-                                    <div className="row">
+                                    {/* <div className="row">
                                         <div className="col-md-6">
                                             <label>Profession</label>
                                         </div>
                                         <div className="col-md-6">
                                             <p>Web Developer and Designer</p>
                                         </div>
-                                    </div>
+                                    </div> */}
                         </div>
                         <div className={api? 'tab-pane fade show active':'tab-pane fade'} role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <label>API KEy</label>
+                                            <label>API KEY</label>
                                         </div>
                                         <div className="col-md-6">
-                                            <p>54678903-3483748390434</p>
-                                            {/* <p>{{user?.apiKey}}</p> */}
+                                            <p>{user.apiKey}</p>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -135,8 +152,7 @@ function Profile() {
                                             <label>Secret Key </label>
                                         </div>
                                         <div className="col-md-6">
-                                            <p>5467389204394834267839032</p>
-                                            {/* <p>{{user?.apiSecret}}</p> */}
+                                            <p>{user.apiSecret}</p>
                                         </div>
                                     </div>
                         </div>

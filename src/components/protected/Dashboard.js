@@ -25,51 +25,19 @@ function Dashboard() {
     account,
     setAccount,
     kycStatus,
-    setKycStatus
+    setTheUser,
+    setKycStatus,
+    setAccountBalance,
+    setTheKycStatus
   } = useGlobalContext();
   const [profilePic,setProfilePic] = useState(false);
+  const setTheToken = () =>{
+    setToken(helpers.getToken());
+    if(helpers.getToken() == null){
+      history.push("/login")
+    }
+  }
   
-  const setTheUser = () =>{
-    setUser(helpers.getUser());
-    console.log(user);
-  }
-  const setAccountBalance = ()=>{
-    axios({
-      method: 'GET',
-      url: `${url}/account`,
-      headers:{
-        Authorization:`Bearer ${token}`,
-      }
-    }).then(response => {
-      if(response.data){
-        let smsBalance = response.data.smsBalance
-        return setAccount(smsBalance)
-      }
-    })
-    .catch(error=>{
-      console.log(error); 
-    })
-  }
-  const setTheKycStatus = ()=>{
-    axios({
-      method: 'GET',
-      url: `${url}/kyc`,
-      headers:{
-        Authorization:`Bearer ${token}`,
-      }
-    }).then(response => {
-      console.log(response.data.data);
-      if(response.data.data === null){
-        return setKycStatus(false);
-      }
-      if(response.data.data === !null){
-        return setKycStatus(true);
-      }
-    })
-    .catch(error=>{
-      console.log(error); 
-    })
-  }
   useEffect(() => {
     setAccountBalance();
     setTheKycStatus();
@@ -166,9 +134,9 @@ function Dashboard() {
            <p>
             Need Support
            </p>
-           <button className="btn btn-succes">
+           <a href="/support" className="btn btn-succes">
             Send a message 
-           </button>
+           </a >
           </div >
         </div>
      </div>

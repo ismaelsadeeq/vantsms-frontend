@@ -1,14 +1,41 @@
 import React, {useState,useEffect} from 'react'
 import Sidebar from './Sidebar'
+import { useHistory } from "react-router-dom";
 import { CgProfile } from 'react-icons/cg';
 import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
 import '../../Stylesheet/transaction.css'
+const helpers = require('./helpers');
 
 
 function Transaction() {
-  const {showLinks,account} = useGlobalContext()
+  let history = useHistory();
+  const {
+    showLinks,
+    account,
+    user,
+    token,
+    setToken,
+    setTheUser,
+    setTheKycStatus,
+    setAccountBalance
+  } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
+
+  const setTheToken = () =>{
+    setToken(helpers.getToken());
+    if(helpers.getToken() == null){
+      history.push("/login")
+    }
+  }
+  useEffect(() => {
+    setAccountBalance();
+    setTheKycStatus();
+    setTheUser();
+    setTheToken();
+    console.log(user.firstname)
+    console.log(account)
+  }, [token])
   return (
     <div className="dashContainer">
     <div className="">
@@ -18,8 +45,8 @@ function Transaction() {
         <div className="dashContainer-nav">
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
-          <p>Abubakar</p>
-          <p>{account.balance}</p>
+          <p>{user.firstname}</p>
+          <p>{account}</p>
           </div>
         </div>
         <div className="margin"></div>
