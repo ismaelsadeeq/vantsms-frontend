@@ -57,7 +57,9 @@ function Dashboard() {
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
           <p>{user.firstname}</p>
-          <p>{account}</p>
+         
+           {account?<p>{account}</p>:<p>0.00</p>}
+      
           </div>
         </div>
         <div className={`${showLinks?"hid dashContainer-body":"dashContainer-body"}`}>
@@ -69,7 +71,7 @@ function Dashboard() {
             Account Balance
            </p>
            <h4>
-           {account}
+           {account?<h4>{account}</h4>:<h4>0.00</h4>}
            </h4>
           </div >
           <div className="dash-content">

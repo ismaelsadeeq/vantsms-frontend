@@ -101,7 +101,7 @@ function Register() {
                   </div>
                   <div className="field">
                     <label className="label">Phone Number</label>
-                    <input className="input" type="number" placeholder="Phone Number" name="phoneNumber" value={info.phoneNumber} onChange={(e)=>{changeHandler(e)}} required />
+                    <input className="input"  placeholder="Phone Number" name="phoneNumber" value={info.phoneNumber} onChange={(e)=>{changeHandler(e)}} required />
                   </div>
                   <div className="field">
                     <label className="label">Password</label>

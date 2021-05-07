@@ -46,7 +46,7 @@ function Transaction() {
           <div className="dashContainer-nav-content">
           {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
           <p>{user.firstname}</p>
-          <p>{account}</p>
+          {account?<p>{account}</p>:<p>0.00</p>}
           </div>
         </div>
         <div className="margin"></div>
