@@ -49,6 +49,16 @@ function Transaction() {
     })
       
   }
+  const addCount = () =>{
+    let newCount = count + 1
+    setCount(newCount)
+  }
+  const subtractCount = () =>{
+    if(count > 0){
+      let newCount = count - 1
+      setCount(newCount)
+    } 
+  }
   useEffect(() => {
     setAccountBalance();
     setTheKycStatus();
@@ -82,6 +92,10 @@ function Transaction() {
             {
               transaction.map((data)=>{
                 const {id,createdAt,trxType,amount} = data
+                // let date1 = createdAt.slice(0,18);
+                // let date2 = date1.slice(13,0);
+                // let date3 = date1.slice(8,0);
+                // let date = date2 + date3
                 return <div key={id} className="transaction-content">
                   <p>{createdAt}</p>
                   <p>{trxType}</p>
@@ -90,10 +104,10 @@ function Transaction() {
               })
             }
             <div className="transaction-btn">
-            <button className="view-btn btn btn-danger">
+            <button className="view-btn btn btn-danger" onClick={subtractCount}>
               back
             </button>
-            <button className="view-btn btn ">
+            <button className="view-btn btn" onClick={addCount}>
               next
             </button>
             </div>

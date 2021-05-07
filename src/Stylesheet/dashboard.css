@@ -323,7 +323,11 @@
 	margin: 1em 3em;
 
 }
-
+.p-avatar {
+	font-size: 4em;
+	margin-bottom: 0;
+	padding: 0;
+}
 @media (max-width:900px){
 	.contain {
 		width: 100%;

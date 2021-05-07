@@ -53,11 +53,7 @@ function Profile() {
     <div className="contain emp-profile"> 
                 <div className=" first ">
                     <div className="profile-img">
-                        <img src={profile} alt=""/>
-                        <div className="file btn btn-lg btn-primary">
-                            Change Photo
-                            <input type="file" name="file"/>
-                        </div>
+                    <p className="p-avatar"><CgProfile/></p>
                         <div className="col-md-2">
                             <input type="submit" className="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                         </div>

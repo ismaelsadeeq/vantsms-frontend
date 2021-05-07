@@ -8,6 +8,8 @@ import {FaMoneyBill} from 'react-icons/fa'
 import {BiArchiveOut,BiUserCheck} from 'react-icons/bi'
 import {RiNumbersLine} from 'react-icons/ri'
 import {IoIosHelpCircleOutline} from 'react-icons/io'
+import {RiShieldKeyholeLine} from 'react-icons/ri'
+
 import axios from 'axios';
 import {url} from '../url';
 const helpers = require('./helpers');
@@ -94,7 +96,7 @@ function Dashboard() {
           </div >
           <div className="dash-content">
            <div>
-            <RiNumbersLine />
+            <RiShieldKeyholeLine />
            </div>
            <p>
             API key
