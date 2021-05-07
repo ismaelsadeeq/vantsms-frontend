@@ -13,6 +13,10 @@ const helpers = require('./helpers');
 
 function Kyc() {
   let history = useHistory();
+  const data = {
+    caCertificate:'',
+    cacNo:'',
+  }
   const {
     showLinks,
     account,
@@ -23,13 +27,23 @@ function Kyc() {
     setTheKycStatus,
     setAccountBalance,
   } = useGlobalContext()
+  const [info, setInfo] = useState(data);
   const [profilePic,setProfilePic] = useState(false);
   const [kycDetails,setKycDetails] = useState("");
+
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
       history.push("/login")
     }
+  }
+  function changeHandler (e){
+    const property = e.target.name;
+    const value = e.target.value;
+    setInfo(ev => ({
+      ...ev,
+      [property] : value,
+    }))  
   }
   const kyc =()=>{
     axios({
@@ -55,6 +69,26 @@ function Kyc() {
     })
     .catch(error=>{
       console.log(error); 
+    })
+  }
+  function submitHandler (e) {
+    e.preventDefault();
+    axios({
+      method: 'POST',
+      url: `${url}/kyc`,
+      data: info,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+     
+    }).then(response=>{
+      console.log(response.data)
+      if(response.data.status === 'success'){
+        
+      }
+    })
+    .catch(error=>{
+      console.log(error);
     })
   }
   useEffect(() => {
@@ -143,12 +177,12 @@ function Kyc() {
          <div>
             <h4 className="text-me"> Your <span className="text"> Corporate Affairs Certificate</span> Validation failed</h4>
             <h4 className="text-me">No worries you can upload again</h4>
-            <form>
+            <form onSubmit={(e)=>{submitHandler(e)}}>
             <label>certificate</label>
-            <input type="file" className="cac" required/>
+            <input type="file" className="cac" name="caCertificate" value={info.caCertificate} onChange={(e)=>{changeHandler(e)}} required/>
             <label>certicate number</label>
-            <input type="text" className="" placeholder="Number" required/>
-            <button className="view-btn btn">
+            <input type="text" className="" name="cacNo" placeholder="Number" value={info.cacNo} onChange={(e)=>{changeHandler(e)}}  required/>
+            <button type="submit" className="view-btn btn">
               submit
             </button> 
             </form>
@@ -175,12 +209,12 @@ function Kyc() {
          <div className={ `${showLinks?"hid":"kyc"}`}>
           <div>
             <h4 className="text-me">Upload Your <span className="text"> Corporate Affairs Certificate</span> for Account Validation</h4>
-            <form>
-              <label>certificate</label>
-            <input type="file" className="cac" required />
+            <form onSubmit={(e)=>{submitHandler(e)}}>
+            <label>certificate</label>
+            <input type="file" className="cac" name="caCertificate" value={info.caCertificate} onChange={(e)=>{changeHandler(e)}} required/>
             <label>certicate number</label>
-            <input type="text" className="" placeholder="Number" required/>
-            <button className="view-btn btn">
+            <input type="text" name="cacNo" className="" placeholder="Number" value={info.cacNo} onChange={(e)=>{changeHandler(e)}}  required/>
+            <button type="submit" className="view-btn btn">
               submit
             </button> 
             </form>

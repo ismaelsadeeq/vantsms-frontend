@@ -1,5 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import Sidebar from './Sidebar'
+import {url} from '../url';
+import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { CgProfile } from 'react-icons/cg';
 import {useGlobalContext} from '../context/context'
@@ -21,6 +23,8 @@ function Transaction() {
     setAccountBalance
   } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
+  const [count,setCount] = useState(0)
+  const [transaction,setTransaction] = useState([])
 
   const setTheToken = () =>{
     setToken(helpers.getToken());
@@ -28,14 +32,32 @@ function Transaction() {
       history.push("/login")
     }
   }
+  const getTransactions = ()=>{
+    axios({
+      method: 'GET',
+      url: `${url}/transaction?currentPage=${count}&pageLimit=4`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+     
+    }).then(response=>{
+      console.log(response.data)
+      setTransaction(response.data);
+    })
+    .catch(error=>{
+      console.log(error); 
+    })
+      
+  }
   useEffect(() => {
     setAccountBalance();
     setTheKycStatus();
     setTheUser();
     setTheToken();
+    getTransactions()
     console.log(user.firstname)
     console.log(account)
-  }, [token])
+  }, [token,count])
   return (
     <div className="dashContainer">
     <div className="">
@@ -57,26 +79,16 @@ function Transaction() {
               <p>Type</p>
               <p>Amount</p>
             </div>
-            <div className="transaction-content">
-              <p>May 5</p>
-              <p>Credit</p>
-              <p>2000</p>
-            </div>
-            <div className="transaction-content">
-              <p>April 1</p>
-              <p>Debit</p>
-              <p>1</p>
-            </div>
-            <div className="transaction-content">
-              <p>April 4</p>
-              <p>Debit</p>
-              <p>1</p>
-            </div>
-            <div className="transaction-content">
-              <p>April 6</p>
-              <p>Credit</p>
-              <p>600</p>
-            </div>
+            {
+              transaction.map((data)=>{
+                const {id,createdAt,trxType,amount} = data
+                return <div key={id} className="transaction-content">
+                  <p>{createdAt}</p>
+                  <p>{trxType}</p>
+                  <p>{amount}</p>
+                </div>
+              })
+            }
             <div className="transaction-btn">
             <button className="view-btn btn btn-danger">
               back
