@@ -12,15 +12,6 @@ function Verify() {
   const data = {
     code:''
   }
-  const getLocalStorage = () =>{
-    let user = localStorage.getItem('user')
-    if(user){
-      return JSON.parse(localStorage.getItem('user'))
-    } else{
-      return []
-    }
-  }
-  const [store,setStore] = useState(getLocalStorage())
   const [info, setInfo] = useState(data);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

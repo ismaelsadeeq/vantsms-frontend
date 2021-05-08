@@ -77,12 +77,11 @@
   z-index: 10;
 }
 .modal-container {
-  background: var(--clr-white);
+  background-color: var(--clr-white);
   border-radius: var(--radius);
   width: 90vw;
-  height: 30vh;
+  padding: 2rem;
   max-width: var(--fixed-width);
-  text-align: center;
   display: grid;
   place-items: center;
   position: relative;
@@ -96,4 +95,35 @@
   border-color: transparent;
   color: #d23edd;
   cursor: pointer;
+}
+.border {
+  border: none;
+  border: 0;
+  display: inline;
+  padding: .5rem 0;
+  background-color: #fff;
+}
+.submit-modal-btn {
+  width: 100%;
+  background-color: #fff;
+  font-size: 1rem;
+  padding: 1em;
+  align-self: center;
+  border-color: #d23edd;
+  border-radius: 5px;
+  color: #d23edd;
+  cursor: pointer;
+}
+.form-button {
+  border: 0;
+  border-bottom: 1px solid #d23edd;
+  display: inline;
+  padding: .5rem 0;
+  background-color: #fff;
+}
+.modal-btn {
+  width: 80%;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
 }

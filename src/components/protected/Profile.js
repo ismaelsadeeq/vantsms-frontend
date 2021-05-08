@@ -1,11 +1,10 @@
 import React, {useState,useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 import '../../Stylesheet/dashboard.css'
-import profile from '../assets/images/me.jpg'
 import Sidebar from './Sidebar'
 import { CgProfile } from 'react-icons/cg';
-import prof from '../assets/images/me.jpg'
 import { useGlobalContext } from '../context/context'
+import EditProfile from './EditProfile';
 const helpers = require('./helpers');
 
 function Profile() {
@@ -14,6 +13,7 @@ function Profile() {
 
   const [profilePic,setProfilePic] = useState(false)
   const {
+    openModal,
     remove,
     account,
     showLinks,
@@ -55,7 +55,7 @@ function Profile() {
                     <div className="profile-img">
                     <p className="p-avatar"><CgProfile/></p>
                         <div className="col-md-2">
-                            <input type="submit" className="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                            <input type="submit" className="profile-edit-btn" name="btnAddMore" value="Edit Profile" onClick={openModal}/>
                         </div>
                     </div>
                 </div>
@@ -125,14 +125,6 @@ function Profile() {
                                             <p> {user.phoneNumber}</p>
                                         </div>
                                     </div>
-                                    {/* <div className="row">
-                                        <div className="col-md-6">
-                                            <label>Profession</label>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <p>Web Developer and Designer</p>
-                                        </div>
-                                    </div> */}
                         </div>
                         <div className={api? 'tab-pane fade show active':'tab-pane fade'} role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="row">
@@ -158,6 +150,7 @@ function Profile() {
             </div>        
     </div>
 </section>
+<EditProfile />
 </div>
   )
 }

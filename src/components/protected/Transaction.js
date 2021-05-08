@@ -68,6 +68,32 @@ function Transaction() {
     console.log(user.firstname)
     console.log(account)
   }, [token,count])
+  if(transaction.length === 0){
+    return(
+    <div className="dashContainer">
+    <div className="">
+        <Sidebar />
+    </div>
+    <div className="dashContainer-box">
+        <div className="dashContainer-nav">
+          <div className="dashContainer-nav-content">
+          {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
+          <p>{user.firstname}</p>
+          {account?<p>{account}</p>:<p>0.00</p>}
+          </div>
+        </div>
+        <div className="margin"></div>
+        <div className={`${showLinks?"hid":"transaction"}`}>
+          <div>
+            <div>
+              <h2 className="text-center">No transactions yet</h2>
+            </div>
+          </div>
+        </div>
+     </div>
+      </div>
+    ) 
+  }
   return (
     <div className="dashContainer">
     <div className="">
@@ -91,11 +117,9 @@ function Transaction() {
             </div>
             {
               transaction.map((data)=>{
-                const {id,createdAt,trxType,amount} = data
-                // let date1 = createdAt.slice(0,18);
-                // let date2 = date1.slice(13,0);
-                // let date3 = date1.slice(8,0);
-                // let date = date2 + date3
+                let {id,createdAt,trxType,amount} = data
+                createdAt = createdAt.slice(0,19);
+                // createdAt = createdAt.slice(9,18);
                 return <div key={id} className="transaction-content">
                   <p>{createdAt}</p>
                   <p>{trxType}</p>
