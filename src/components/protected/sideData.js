@@ -2,9 +2,9 @@ import React from 'react';
 import {
   FaHome,
 } from 'react-icons/fa';
-import { MdAccountBox,MdMailOutline,MdHistory } from "react-icons/md";
+import { MdAccountBox,MdHistory } from "react-icons/md";
 import { SiWebmoney } from "react-icons/si";
-import { AiFillFile,AiOutlineSetting } from "react-icons/ai";
+import { AiFillFile } from "react-icons/ai";
 import { BiHelpCircle } from "react-icons/bi";
 
 

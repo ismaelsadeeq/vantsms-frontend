@@ -39,7 +39,6 @@ function Dashboard() {
       history.push("/login")
     }
   }
-  
   useEffect(() => {
     setAccountBalance();
     setTheKycStatus();
@@ -85,12 +84,10 @@ function Dashboard() {
            </p>
            <div>
             {
-            kycStatus? <h4>uploaded</h4>:
-             
+              kycStatus? <h4>uploaded</h4>:
                 <h4>not uploaded
                 <a href="/kyc">  upload</a>
                 </h4>
-                
             }
            </div>
           </div >

@@ -48,6 +48,7 @@ export const AppProvider = ({children}) =>{
     }).then(response => {
       if(response.data){
         let smsBalance = response.data.smsBalance
+        console.log(smsBalance)
         return setAccount(smsBalance)
       }
     })
@@ -63,7 +64,7 @@ export const AppProvider = ({children}) =>{
         Authorization:`Bearer ${token}`,
       }
     }).then(response => {
-      console.log(response.data.data);
+      console.log(response.data);
       if(response.data.data === null){
         return setKycStatus(false);
       }

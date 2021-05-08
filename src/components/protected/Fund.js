@@ -32,8 +32,8 @@ function Fund() {
     setTheKycStatus();
     setTheUser();
     setTheToken();
-    console.log(user.firstname)
-    console.log(account)
+    console.log(user.firstname);
+    console.log(account);
   }, [token])
   return (
     <div className="dashContainer">
