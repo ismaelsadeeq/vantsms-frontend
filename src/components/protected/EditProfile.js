@@ -1,16 +1,19 @@
 import React,{useState,useEffect} from 'react'
 import { FaTimes } from 'react-icons/fa'
+import { useHistory } from "react-router-dom";
 import axios from "axios"
 import {url} from "../url" 
 import { useGlobalContext } from '../context/context'
 const EditProfile = () => {
-  let profileData = {
+
+  let history = useHistory();
+  const profileData = {
     phonenumber:"",
     firstname:"",
     lastname:"",
     password:"",
   }
-  let changePasswordData = {
+  const changePasswordData = {
     password:"",
     newPassword:"",
     confirmPassword:""
@@ -41,17 +44,17 @@ const EditProfile = () => {
   const editProfileSubmitHandler = (e) =>{
     e.preventDefault();
     axios({
-      method: 'POST',
-      url: `${url}/user`,
+      method: 'PUT',
+      url: `${url}/users/profile`,
       data: profile,
       headers:{
         Authorization:`Bearer ${token}`,
       }
-     
     }).then(response=>{
       console.log(response.data)
-      if(response.data.status === 'success'){
-        
+      if(response.data.status === true){
+        alert("user updated")
+        closeModal()
       }
     })
     .catch(error=>{
@@ -62,7 +65,7 @@ const EditProfile = () => {
     e.preventDefault();
     axios({
       method: 'POST',
-      url: `${url}/user`,
+      url: `${url}/auth/change-password`,
       data: changePassword,
       headers:{
         Authorization:`Bearer ${token}`,
@@ -71,7 +74,8 @@ const EditProfile = () => {
     }).then(response=>{
       console.log(response.data)
       if(response.data.status === 'success'){
-        
+        alert("password updated")
+        closeModal()
       }
     })
     .catch(error=>{
@@ -89,25 +93,29 @@ const EditProfile = () => {
       </button>
       {
         state?<div>
-        <form >
+        <form onSubmit={(e)=>{
+          editProfileSubmitHandler(e)
+        }}>
           <label>Phone number</label>
-          <input type="text" name="phonenumber" value={profileData.phonenumber} placeholder="Phone number"  onChange={(e)=>{changeHandler(e)}} required/>
+          <input type="text" name="phonenumber" value={profile.phonenumber} placeholder="Phone number"  onChange={(e)=>{changeHandler(e)}} required/>
           <label>firstname</label>
-          <input type="text" name="firstname" value={profileData.firstname} placeholder="Firstname"  onChange={(e)=>{changeHandler(e)}} required/>
+          <input type="text" name="firstname" value={profile.firstname} placeholder="Firstname"  onChange={(e)=>{changeHandler(e)}} required/>
           <label>lastname</label>
-          <input type="text" name="lastname" value={profileData.lastname} placeholder="Lastname"  onChange={(e)=>{changeHandler(e)}} required/>
+          <input type="text" name="lastname" value={profile.lastname} placeholder="Lastname"  onChange={(e)=>{changeHandler(e)}} required/>
           <button type="submit" className='submit-modal-btn'>
             submit
           </button>
         </form>
       </div>:<div>
-        <form>
+        <form  onSubmit={(e)=>{
+          changePasswordSubmitHandler(e)
+        }}>
           <label>Current Password</label>
-          <input type="password" name="password" value={changePasswordData.password} placeholder="Current Password"  onChange={(e)=>{changeHandlerTwo(e)}} required/>
-          <label>firstname</label>
-          <input type="password" name="newPassword" value={changePasswordData.newPassword} placeholder="New Password"  onChange={(e)=>{changeHandlerTwo(e)}} required/>
-          <label>lastname</label>
-          <input type="password" name="confirmPassword" value={changePasswordData.confirmPassword} placeholder="Confirm New Password"  onChange={(e)=>{changeHandlerTwo(e)}} required/>
+          <input type="password" name="password" value={changePassword.password} placeholder="Current Password"  onChange={(e)=>{changeHandlerTwo(e)}} required/>
+          <label>New password</label>
+          <input type="password" name="newPassword" value={changePassword.newPassword} placeholder="New Password"  onChange={(e)=>{changeHandlerTwo(e)}} required/>
+          <label>Confirm password</label>
+          <input type="password" name="confirmPassword" value={changePassword.confirmPassword} placeholder="Confirm New Password"  onChange={(e)=>{changeHandlerTwo(e)}} required/>
           <button type="submit" className='submit-modal-btn'>
             submit
           </button>
