@@ -7,16 +7,12 @@ import axios from 'axios';
 import {url} from '../url';
 import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
-import '../../Stylesheet/kyc.css'
+import '../../Stylesheet/kyc.css';
 const helpers = require('./helpers');
 
 
 function Kyc() {
   let history = useHistory();
-  const data = {
-    caCertificate:'',
-    cacNo:'',
-  }
   const {
     showLinks,
     account,
@@ -27,9 +23,10 @@ function Kyc() {
     setTheKycStatus,
     setAccountBalance,
   } = useGlobalContext()
-  const [info, setInfo] = useState(data);
   const [profilePic,setProfilePic] = useState(false);
   const [kycDetails,setKycDetails] = useState("");
+  const [number, setNumber] = useState("");
+  const [selectedFile, setSelectedFile] = useState(undefined);
 
   const setTheToken = () =>{
     setToken(helpers.getToken());
@@ -37,14 +34,7 @@ function Kyc() {
       history.push("/login")
     }
   }
-  function changeHandler (e){
-    const property = e.target.name;
-    const value = e.target.value;
-    setInfo(ev => ({
-      ...ev,
-      [property] : value,
-    }))  
-  }
+ 
   const kyc =()=>{
     axios({
       method: 'GET',
@@ -73,12 +63,18 @@ function Kyc() {
   }
   function submitHandler (e) {
     e.preventDefault();
+    const formData = new FormData();
+    console.log(number)
+    formData.append("cacNo", number);
+    formData.append("cacCertificate", selectedFile); // If I set this state with e.target.file[0] it displays blank screen 
+    console.log(formData)
     axios({
       method: 'POST',
       url: `${url}/kyc`,
-      data: info,
+      data: formData,
       headers:{
-        Authorization:`Bearer ${token}`,
+        "Content-type":"multipart/form-data",
+        "Authorization":`Bearer ${token}`,
       }
      
     }).then(response=>{
@@ -90,6 +86,32 @@ function Kyc() {
     .catch(error=>{
       console.log(error);
     })
+  }
+  const changeHandler = (e)=>{ //this is the change handler
+    let reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+
+    reader.onload = (e) =>{ // I try posting only the image on change
+      const formData = {caCertificate:e.target.result}
+      console.log(token)
+      axios({
+        method: 'POST',
+        url: `${url}/kyc`,
+        data: formData,
+        headers:{
+          "Authorization":`Bearer ${token}`,
+        }
+       
+      }).then(response=>{
+        console.log(response.data)
+        if(response.data.status === 'success'){
+          
+        }
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    } 
   }
   useEffect(() => {
     setAccountBalance();
@@ -179,9 +201,9 @@ function Kyc() {
             <h4 className="text-me">No worries you can upload again</h4>
             <form onSubmit={(e)=>{submitHandler(e)}}>
             <label>certificate</label>
-            <input type="file" className="cac" name="caCertificate" value={info.caCertificate} onChange={(e)=>{changeHandler(e)}} required/>
+            <input type="file" className="cac" name="caCertificate"  onChange={(e)=>{changeHandler(e)}} required/>
             <label>certicate number</label>
-            <input type="text" className="" name="cacNo" placeholder="Number" value={info.cacNo} onChange={(e)=>{changeHandler(e)}}  required/>
+            <input type="text" className="" name="cacNo" placeholder="Number" value={number} onChange={(e)=>{setNumber(e.target.value)}}  required/>
             <button type="submit" className="view-btn btn">
               submit
             </button> 
@@ -192,7 +214,7 @@ function Kyc() {
     </div>
     )
   }
-  return (
+  return ( // This is the Method that loads default because no Kyc is uploaded
       <div className="dashContainer">
       <div className="">
           <Sidebar />
@@ -211,9 +233,9 @@ function Kyc() {
             <h4 className="text-me">Upload Your <span className="text"> Corporate Affairs Certificate</span> for Account Validation</h4>
             <form onSubmit={(e)=>{submitHandler(e)}}>
             <label>certificate</label>
-            <input type="file" className="cac" name="caCertificate" value={info.caCertificate} onChange={(e)=>{changeHandler(e)}} required/>
+            <input type="file" className="cac" name="caCertificate"  onChange={(e) => changeHandler(e) }/>
             <label>certicate number</label>
-            <input type="text" name="cacNo" className="" placeholder="Number" value={info.cacNo} onChange={(e)=>{changeHandler(e)}}  required/>
+            <input type="text" placeholder="Number" name="cacNo"  value={number} onChange={(e) => setNumber(e.target.value)} required />
             <button type="submit" className="view-btn btn">
               submit
             </button> 
