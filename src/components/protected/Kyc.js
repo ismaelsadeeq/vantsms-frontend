@@ -28,6 +28,9 @@ function Kyc() {
   const [number, setNumber] = useState("");
   const [selectedFile, setSelectedFile] = useState(undefined);
 
+  const checkIsAdmin = ()=>{
+    console.log(user)
+  }
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
@@ -114,6 +117,7 @@ function Kyc() {
     } 
   }
   useEffect(() => {
+    checkIsAdmin()
     setAccountBalance();
     kyc()
     setTheUser();

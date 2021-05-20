@@ -76,6 +76,24 @@ export const AppProvider = ({children}) =>{
       console.log(error); 
     })
   }
+  const getReplies = ()=>{
+    axios({
+      method: 'GET',
+      url: `${url}/support?currentPage=0&pageLimit=5`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+     
+    }).then(response=>{
+      console.log(response.data)
+      // if(response.data.status === true){
+      //   alert("message send we'll get back to you shortly")
+      // }
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+  }
   return <AppContext.Provider
   value={{
     remove,
@@ -97,7 +115,8 @@ export const AppProvider = ({children}) =>{
     setTheUser,
     setKycStatus,
     setAccountBalance,
-    setTheKycStatus
+    setTheKycStatus,
+    getReplies
   }}
   >{children} </AppContext.Provider>
 }

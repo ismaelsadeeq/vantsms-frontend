@@ -14,9 +14,6 @@ const helpers = require('./helpers');
 function Support() {
 
   let history = useHistory();
-  let supportData = {
-    support:""
-  }
   const {
     showLinks,
     openModal,
@@ -27,9 +24,10 @@ function Support() {
     setTheUser,
     setTheKycStatus,
     setAccountBalance,
+    getReplies
   } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
-  const [data,setData] = useState(supportData)
+  const [support,setSupport] = useState("")
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
@@ -41,29 +39,23 @@ function Support() {
     axios({
       method: 'POST',
       url: `${url}/support`,
-      data: data,
+      data: {"support":support},
       headers:{
         Authorization:`Bearer ${token}`,
       }
      
     }).then(response=>{
       console.log(response.data)
-      if(response.data.status === 'success'){
-        
+      if(response.data.status === true){
+        alert("message send we'll get back to you shortly")
+        setSupport("")
       }
     })
     .catch(error=>{
       console.log(error);
     })
   }
-  function changeHandler (e){
-    const property = e.target.name;
-    const value = e.target.value;
-    supportData(ev => ({
-      ...ev,
-      [property] : value,
-    }))  
-  }
+
   useEffect(() => {
     setAccountBalance();
     setTheKycStatus();
@@ -90,12 +82,12 @@ function Support() {
             <h4 className="text-me">Do you have something in mind you think we should know</h4>
             <p>feel free to reach out</p>
             <form onSubmit={(e)=>{submitHandler(e)}}>
-              <textarea type="text" name="support" rows="8" value={supportData.support} onChange={(e)=>{changeHandler(e)}}  placeholder="Whats on your mind" required ></textarea>
+              <textarea type="text" name="support" rows="8" value={support} onChange={(e)=>{setSupport(e.target.value)}}  placeholder="Whats on your mind" required ></textarea>
               <button type="submit" className="view-btn btn send">
                 Send Message
               </button>
             </form>
-            <button className="view-btn reply btn" onClick={openModal}>
+            <button className="view-btn reply btn"  onClick={openModal,getReplies}>
               Show support replies
             </button>
         </div>
