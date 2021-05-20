@@ -8,6 +8,7 @@ import {url} from '../url';
 import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
 import '../../Stylesheet/kyc.css';
+import { FaBalanceScaleLeft } from 'react-icons/fa';
 const helpers = require('./helpers');
 
 
@@ -22,15 +23,17 @@ function Kyc() {
     setTheUser,
     setTheKycStatus,
     setAccountBalance,
+    kycDetails,
+    setKycDetails,
+    admin,
+    setAdmin
   } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false);
-  const [kycDetails,setKycDetails] = useState("");
   const [number, setNumber] = useState("");
   const [selectedFile, setSelectedFile] = useState(undefined);
 
-  const checkIsAdmin = ()=>{
-    console.log(user)
-  }
+
+
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
@@ -39,6 +42,24 @@ function Kyc() {
   }
  
   const kyc =()=>{
+    let youAdmin ;
+    axios({
+      method: 'GET',
+      url: `${url}/admin/isAdmin`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+    }).then(response => {
+      console.log(response.data);
+      if(response.data.status === true){
+        setAdmin(true);
+        setKycDetails("admin");
+        youAdmin = "yes"
+      }
+    })
+    .catch(error=>{
+      console.log(error); 
+    })
     axios({
       method: 'GET',
       url: `${url}/kyc`,
@@ -47,18 +68,20 @@ function Kyc() {
       }
     }).then(response => {
       console.log(response.data);
-      if(response.data.data === null){
-        return setKycDetails("null");
+      if(admin === false && response.data.data === null && youAdmin !== "yes"){
+        console.log(youAdmin)
+        return setKycDetails("default");
       }
-      if(response.data.data.caCertificate === !null){
+      if(admin === false && response.data.data.caCertificate === !null ){
         return setKycDetails("uploaded");
       }
-      if(response.data.data.isVerified === true){
+      if(admin === false && response.data.data.isVerified === true){
         return setKycDetails("verified");
       }
-      if(response.data.data.isVerified === false){
+      if(admin === false && response.data.data.isVerified === false){
         return setKycDetails("failed");
       }
+      
     })
     .catch(error=>{
       console.log(error); 
@@ -116,8 +139,8 @@ function Kyc() {
       })
     } 
   }
+
   useEffect(() => {
-    checkIsAdmin()
     setAccountBalance();
     kyc()
     setTheUser();
@@ -218,7 +241,32 @@ function Kyc() {
     </div>
     )
   }
-  return ( // This is the Method that loads default because no Kyc is uploaded
+  if(kycDetails =="admin"){
+    return (
+      <div className="dashContainer">
+      <div className="">
+          <Sidebar />
+      </div>
+      <div className="dashContainer-box">
+          <div className="dashContainer-nav">
+            <div className="dashContainer-nav-content">
+            {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
+            <p>{user.firstname}</p>
+            {account?<p>{account}</p>:<p>0.00</p>}
+            </div>
+          </div>
+          <div className="margin"></div>
+         <div className={ `${showLinks?"hid":"kyc"}`}>
+         <div>
+            
+          </div> 
+         </div>
+       </div>
+    </div>
+    )
+  }
+  if(kycDetails =="default"){
+    return ( // This is the Method that loads default because no Kyc is uploaded
       <div className="dashContainer">
       <div className="">
           <Sidebar />
@@ -245,9 +293,13 @@ function Kyc() {
             </button> 
             </form>
           </div>
-         </div>
-       </div>
+          </div>
+        </div>
       </div>
+  )
+  }
+  return ( // This is the Method that loads default because no Kyc is uploaded
+      <div></div>
   )
 }
 

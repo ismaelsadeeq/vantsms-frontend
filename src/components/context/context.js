@@ -27,6 +27,9 @@ export const AppProvider = ({children}) =>{
   const [account,setAccount] = useState("");
   const [transactions,setTransactions] = useState([]);
   const [kycStatus,setKycStatus] = useState(false)
+  const [kycDetails,setKycDetails] = useState("");
+  const [admin,setAdmin] = useState(false)
+  
 
   function openModal(){
     setIsModalOpen(true)
@@ -116,7 +119,11 @@ export const AppProvider = ({children}) =>{
     setKycStatus,
     setAccountBalance,
     setTheKycStatus,
-    getReplies
+    getReplies,
+    kycDetails,
+    setKycDetails,
+    admin,
+    setAdmin
   }}
   >{children} </AppContext.Provider>
 }
