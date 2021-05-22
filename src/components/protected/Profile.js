@@ -105,7 +105,7 @@ function Profile() {
                                         </div>
                                         <div className="col-md-6">
 																			{
-                													user.isVerified?<p>Verified</p>:<p>Not verified</p>
+                													user.kycStatus?<p>Verified</p>:<p>Not verified</p>
               														}
                                         </div>
                                     </div>

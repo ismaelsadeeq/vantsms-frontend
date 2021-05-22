@@ -96,7 +96,7 @@ function Dashboard() {
             API key
            </p>
            <h4>
-           <a href="/kyc">Go to profile</a>
+           <a href="/profile">Go to profile</a>
            </h4>
           </div >
           <div className="dash-content">

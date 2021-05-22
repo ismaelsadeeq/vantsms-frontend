@@ -51,7 +51,7 @@ function Fund() {
         <div className="margin"></div>
        <div className={`${showLinks?"hid":"fund"}`} >
          <div className="group">
-         <h3 className="text-me">Account Number: {user.accountNumber}</h3>
+         <h3 className="text-me">Account Number: {user.accountNumber?user.accountNumber:"xxxx1234"}</h3>
           <h3  className="text-me">Account Name: {user.firstname} {user.lastname}</h3>
           <h3  className="text-me">Bank: Moniepoint</h3>
           <h3 className="text-me">1k to 100k - 15N per SMS unit</h3>

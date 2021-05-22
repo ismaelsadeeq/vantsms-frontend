@@ -29,7 +29,7 @@
     padding: 1rem;
     margin-top:2rem ;
     width: 80%;
-    height: 100vh;
+    height: 100%;
   }
   .kyc form {
     padding: 0;
@@ -49,9 +49,7 @@
     border: 1px solid #fff;
     padding: 1rem 1rem;
   }
-  .user-name {
-    /* padding:.5em; */
-  }
+
 }
 @media (min-width:900px){
   .kyc {

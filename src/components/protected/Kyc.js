@@ -28,8 +28,7 @@ function Kyc() {
     setAccountBalance,
     kycDetails,
     setKycDetails,
-    admin,
-    setAdmin,
+  
     openUser,
     isUserOpen,
     setIsUserOpen,
@@ -44,6 +43,7 @@ function Kyc() {
   const [userData, setUserData] = useState(null);
   const [kycData,setKycData]= useState(null);
   const [kycStatus, setKycStatus] = useState(null)
+  const [certlength, setCertlength] = useState(null)
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
@@ -61,7 +61,6 @@ function Kyc() {
     }).then(response => {
       console.log(response.data);
       if(response.data.status === true){
-        setAdmin(true);
         setKycDetails("admin");
         youAdmin = "yes"
       }
@@ -77,17 +76,17 @@ function Kyc() {
       }
     }).then(response => {
       console.log(response.data);
-      if(admin === false && response.data.data === null && youAdmin !== "yes"){
+      if(response.data.data === null && youAdmin !== "yes"){
         console.log(youAdmin)
         return setKycDetails("default");
       }
-      if(admin === false && response.data.data.caCertificate === !null ){
+      if(response.data.data.isVerified ==null){
         return setKycDetails("uploaded");
       }
-      if(admin === false && response.data.data.isVerified === true){
+      if(response.data.data.isVerified === true){
         return setKycDetails("verified");
       }
-      if(admin === false && response.data.data.isVerified === false){
+      if(response.data.data.isVerified === false){
         return setKycDetails("failed");
       }
       
@@ -174,7 +173,17 @@ function Kyc() {
     if(count > 0){
       let newCount = count - 1
       setCount(newCount)
+    }else{
+      alert("this is the first page")
     } 
+  }
+  const back = () =>{
+    subtractCount();
+     getUsers();
+  }
+  const next = () =>{
+    addCount();
+     getUsers();
   }
   const openUserModal = (id)=>{
     setId(id);
@@ -206,8 +215,10 @@ function Kyc() {
     }).then(response=>{
       console.log(response.data);
       if(response.data.data){
-        setKycStatus(true);
-        return setKycData("kycData",response.data.data)
+        setKycStatus(true);  
+        setKycData(response.data.data)
+        setCertlength(parseInt(kycData.caCertificate.length))
+        return console.log(certlength)
       }
       setKycStatus(false);
     })
@@ -224,6 +235,7 @@ function Kyc() {
     getUsers();
     console.log(user.firstname)
     console.log(account)
+   
   }, [token])
   
   if(kycDetails =="uploaded"){
@@ -245,9 +257,9 @@ function Kyc() {
          <div>
           <h4 className="text-me">Your <span className="text"> Corporate Affairs Certificate</span>  is uploaded <br></br>awaiting validation</h4>
           <p>go to your profile</p>
-          <button className="view-btn btn">
+          <a className="view-btn btn" href="/profile">
              <FiCornerDownRight />
-          </button>
+          </a>
       </div>
          </div>
        </div>
@@ -274,9 +286,9 @@ function Kyc() {
          <div>
           <h4 className="text-me">Yay!!!  Your <span className="text"> Corporate Affairs Certificate</span>  is Validated</h4>
             <p>go to your profile</p>
-            <button className="view-btn btn">
-              <FiCornerDownRight />
-            </button>
+            <a className="view-btn btn" href="/profile">
+             <FiCornerDownRight />
+          </a>
           </div>
          </div>
        </div>
@@ -358,17 +370,17 @@ function Kyc() {
              })
            }
             <div className="transaction-btn">
-              <button className="view-btn btn btn-danger" onClick={subtractCount}>
+              <button className="view-btn btn btn-danger" onClick={back}>
                 back
               </button>
-              <button className="view-btn btn" onClick={addCount}>
+              <button className="view-btn btn" onClick={next}>
                 next
               </button>
             </div>
           </div> 
          </div>
        </div>
-       {isUserOpen?<User user={userData} kyc={kycData} status={kycStatus}/>:null}
+       {isUserOpen?<User user={userData} kyc={kycData} status={kycStatus} certlength={certlength} />:null}
     </div>
     )
   }
