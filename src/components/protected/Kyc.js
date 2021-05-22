@@ -47,6 +47,7 @@ function Kyc() {
   const [search,setSearch] = useState(false);
   const [searchEmail, setSearchEmail] = useState("");
   const [searchData, setSearchData] = useState(null)
+  const [limit, setLimit] = useState(null)
 
   const setTheToken = () =>{
     setToken(helpers.getToken());
@@ -161,8 +162,9 @@ function Kyc() {
      
     }).then(response=>{
       console.log(response.data)
-      if(response.data.length>= 1){
-        setUsers(response.data);
+      if(response.data.users.length>= 1){
+        setLimit(response.data.count);
+        setUsers(response.data.users);
       }
     })
     .catch(error=>{
@@ -189,6 +191,11 @@ function Kyc() {
   }
   const next = (e) =>{
     e.preventDefault()
+    console.log("limit",limit/5)
+    let high = Math.floor(limit/5)
+    if(count > high){
+      return alert("no more users to fetch")
+    }
     setCount(count +1);
     return getUsers();
   }
@@ -206,7 +213,7 @@ function Kyc() {
       console.log(response.data);
       if(response.data){
         setUserData(response.data)
-        console.log("user data",userData)
+        return console.log("user data",userData)
       }
     })
     .catch(error=>{
