@@ -104,7 +104,7 @@ function Profile() {
                                             <label>Verification</label>
                                         </div>
                                         <div className="col-md-6">
-																				{
+																			{
                 													user.isVerified?<p>Verified</p>:<p>Not verified</p>
               														}
                                         </div>

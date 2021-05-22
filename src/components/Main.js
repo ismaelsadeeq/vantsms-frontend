@@ -10,7 +10,6 @@ import Admin from './adminComponent/Admin'
 import AdminKyc from './adminComponent/AdminKyc'
 import AdminSupport from './adminComponent/AdminSupport'
 import AdminUsers from './adminComponent/AdminUsers'
-import ChangePassword from './protected/ChangePassword'
 import Contact from './protected/Contact'
 import Dashboard from './protected/Dashboard'
 import Kyc from './protected/Kyc'
@@ -46,7 +45,6 @@ function Main() {
         <Route exact path="/transaction" component={Transaction} />
         <Route exact path="/forget-password" component={ForgetPassword} />
         <Route exact path="/reset-password" component={ResetPassword} />
-        <Route exact path="/change-password" component={ChangePassword} />
         <Route exact path="/enter-code" component={Code} />
         <Route exact path="/sms" component={Sms} />
         <Route exact path="/fund" component={Fund} />

@@ -40,6 +40,18 @@
     width: 65%;
     margin: 1rem;
   }
+  .center {
+    display: flex;
+    flex-direction: column;
+  }
+  .user {
+    flex-direction: column;
+    border: 1px solid #fff;
+    padding: 1rem 1rem;
+  }
+  .user-name {
+    /* padding:.5em; */
+  }
 }
 @media (min-width:900px){
   .kyc {
@@ -52,9 +64,33 @@
     padding: .5rem;
     /* width: 15%; */
   }
- 
   .send {
     width: 20%;
+  }
+  .user-name{
+    margin-left: 1rem;
+    position: absolute;
+  }
+  .user-avatar {
+    padding-bottom: 1rem;
+    font-size: 2em;
+    color: #805d83;
+  }
+  .users {
+    padding: 1em;
+    background-color: #fff;
+  }
+  .user {
+    padding: .5rem;
+    border: 1px solid #fff;
+    background-color: rgb(241, 241, 241);
+  }
+  .kycStatus {
+    position: absolute;
+    margin-top: .5em;
+  }
+  .user-name {
+    padding-top: .5rem;
   }
 
 }
@@ -125,5 +161,24 @@
   width: 80%;
   padding: 1em;
   display: flex;
+  justify-content: space-around;
+}
+.user-avatar {
+  font-size: 2em;
+  color: #805d83;
+}
+.user {
+  display: flex;
   justify-content: space-between;
+}
+
+.user-btn {
+  font-family: ubuntu;
+  padding: .4em;
+}
+.user-btn:hover {
+  color: #d23edd;
+}
+.kyc-color {
+  color: #d23edd;
 }

@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import Sidebar from './Sidebar'
+import User from './User';
 import { CgProfile } from 'react-icons/cg';
 import { useHistory } from "react-router-dom";
 import { FiCornerDownRight } from 'react-icons/fi';
@@ -9,6 +10,8 @@ import {useGlobalContext} from '../context/context'
 import profile from '../assets/images/me.jpg'
 import '../../Stylesheet/kyc.css';
 import { FaBalanceScaleLeft } from 'react-icons/fa';
+import { userExample } from './sideData';
+
 const helpers = require('./helpers');
 
 
@@ -26,21 +29,27 @@ function Kyc() {
     kycDetails,
     setKycDetails,
     admin,
-    setAdmin
+    setAdmin,
+    openUser,
+    isUserOpen,
+    setIsUserOpen,
+    setGetUser
   } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false);
   const [number, setNumber] = useState("");
   const [selectedFile, setSelectedFile] = useState(undefined);
-
-
-
+  const [count,setCount] = useState(0)
+  const [id,setId] = useState("")
+  const [users, setUsers] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [kycData,setKycData]= useState(null);
+  const [kycStatus, setKycStatus] = useState(null)
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
       history.push("/login")
     }
   }
- 
   const kyc =()=>{
     let youAdmin ;
     axios({
@@ -139,12 +148,80 @@ function Kyc() {
       })
     } 
   }
+  const getUsers = ()=>{
+    axios({
+      method: 'GET',
+      url: `${url}/admin/users?currentPage=${count}&pageLimit=6`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+     
+    }).then(response=>{
+      console.log(response.data)
+      if(response.data.length>= 1){
+        setUsers(response.data);
+      }
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+  }
+  const addCount = () =>{
+    let newCount = count + 1
+    setCount(newCount);
+  }
+  const subtractCount = () =>{
+    if(count > 0){
+      let newCount = count - 1
+      setCount(newCount)
+    } 
+  }
+  const openUserModal = (id)=>{
+    setId(id);
+    openUser()
+    axios({
+      method: 'GET',
+      url: `${url}/admin/users/${id}`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+     
+    }).then(response=>{
+      console.log(response.data);
+      if(response.data){
+        setUserData(response.data)
+        console.log("user data",userData)
+      }
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+    axios({
+      method: 'GET',
+      url: `${url}/kyc/${id}`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+     
+    }).then(response=>{
+      console.log(response.data);
+      if(response.data.data){
+        setKycStatus(true);
+        return setKycData("kycData",response.data.data)
+      }
+      setKycStatus(false);
+    })
+    .catch(error=>{
+      console.log(error);
+    })
 
+  }
   useEffect(() => {
     setAccountBalance();
-    kyc()
+    kyc();
     setTheUser();
     setTheToken();
+    getUsers();
     console.log(user.firstname)
     console.log(account)
   }, [token])
@@ -256,12 +333,42 @@ function Kyc() {
             </div>
           </div>
           <div className="margin"></div>
-         <div className={ `${showLinks?"hid":"kyc"}`}>
-         <div>
-            
+         <div className={ `${showLinks?"hid":"kyc users"}`}>
+         <div className="">
+           {
+             users.map((data)=>{
+               const {id, firstname, lastname,kycStatus} = data;
+               return  <div className="user " key={id}>
+               <div className="center">
+                 <span className="user-avatar"><CgProfile/></span>
+                 <span className="user-name">{firstname + " "+ lastname}</span>
+               </div>
+               <div>
+               <span className="kycStatus">kyc status:{
+                 kycStatus?<span className="kyc-color"> verified</span>:<span className="kyc-color"> not verified</span>
+              }
+              </span>
+               </div>
+               <div >
+                 <button className="user-btn" onClick={()=>{openUserModal(id)}}>
+                 user info
+                 </button>
+               </div>
+             </div>
+             })
+           }
+            <div className="transaction-btn">
+              <button className="view-btn btn btn-danger" onClick={subtractCount}>
+                back
+              </button>
+              <button className="view-btn btn" onClick={addCount}>
+                next
+              </button>
+            </div>
           </div> 
          </div>
        </div>
+       {isUserOpen?<User user={userData} kyc={kycData} status={kycStatus}/>:null}
     </div>
     )
   }

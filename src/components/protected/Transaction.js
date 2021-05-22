@@ -128,12 +128,12 @@ function Transaction() {
               })
             }
             <div className="transaction-btn">
-            <button className="view-btn btn btn-danger" onClick={subtractCount}>
-              back
-            </button>
-            <button className="view-btn btn" onClick={addCount}>
-              next
-            </button>
+              <button className="view-btn btn btn-danger" onClick={subtractCount}>
+                back
+              </button>
+              <button className="view-btn btn" onClick={addCount}>
+                next
+              </button>
             </div>
           </div>
         </div>

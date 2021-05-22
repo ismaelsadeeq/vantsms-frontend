@@ -7,8 +7,36 @@ import { SiWebmoney } from "react-icons/si";
 import { AiFillFile } from "react-icons/ai";
 import { BiHelpCircle } from "react-icons/bi";
 
-
-
+export let userExample = {
+  "id": "",
+  "email": "",
+  "firstname": "",
+  "lastname": "",
+  "phoneNumber": "",
+  "apiKey": null,
+  "apiSecret": null,
+  "accountNumber": null,
+  "isCorporate": null,
+  "password": "",
+  "kycStatus": null,
+  "isVerified": null,
+  "createdAt": "",
+  "updatedAt": "",
+  "deletedAt": null
+}
+export  let userData = 
+{
+  "id":"",
+  "email":"",
+  "firstname":"",
+  "lastname":"",
+  "phoneNumber":"",
+  "apiKey":"",
+  "apiSecret":"",
+  "accountNumber":"",
+  "isCorporate":false,
+  "isVerified":true,
+}
 export const links = [
   {
     id: 1,

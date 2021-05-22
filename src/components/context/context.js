@@ -1,24 +1,13 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import {url} from '../url';
+import { userExample } from '../protected/sideData';
+import { userData } from '../protected/sideData';
 const helpers = require("../protected/helpers");
 const AppContext = React.createContext();
 
 export const AppProvider = ({children}) =>{
-  let userData = 
-  {
-    "id":"",
-    "email":"",
-    "firstname":"",
-    "lastname":"",
-    "phoneNumber":"",
-    "apiKey":"",
-    "apiSecret":"",
-    "accountNumber":"",
-    "isCorporate":false,
-    "isVerified":true,
-  }
- 
+
   const [remove, setRemove] = useState("");
   const [showLinks,setShowLinks] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -29,8 +18,15 @@ export const AppProvider = ({children}) =>{
   const [kycStatus,setKycStatus] = useState(false)
   const [kycDetails,setKycDetails] = useState("");
   const [admin,setAdmin] = useState(false)
+  const [isUserOpen,setIsUserOpen] = useState(false)
+  const [getUser,setGetUser] = useState(userExample);
   
-
+  function openUser(){
+    setIsUserOpen(true)
+  }
+  function closeUser(){
+    setIsUserOpen(false)
+  }
   function openModal(){
     setIsModalOpen(true)
   }
@@ -123,7 +119,13 @@ export const AppProvider = ({children}) =>{
     kycDetails,
     setKycDetails,
     admin,
-    setAdmin
+    setAdmin,
+    isUserOpen,
+    openUser,
+    setIsUserOpen,
+    closeUser,
+    setGetUser,
+    getUser
   }}
   >{children} </AppContext.Provider>
 }

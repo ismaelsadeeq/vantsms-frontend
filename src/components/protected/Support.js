@@ -87,7 +87,7 @@ function Support() {
                 Send Message
               </button>
             </form>
-            <button className="view-btn reply btn"  onClick={openModal,getReplies}>
+            <button className="view-btn reply btn"  onClick={openModal}>
               Show support replies
             </button>
         </div>
