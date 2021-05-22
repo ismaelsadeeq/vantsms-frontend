@@ -90,6 +90,22 @@
   .user-name {
     padding-top: .5rem;
   }
+  .searchDiv {
+    display: flex;
+    justify-content: space-between;
+  }
+  .searchInput {
+    width: 90%;
+    
+  }
+  .searchButton {
+    margin-left: 1rem;
+    width: 20%;
+    height: 8vh;
+  }
+  .users {
+    overflow-y: hidden;
+  }
 
 }
 /* Modal */
@@ -179,4 +195,7 @@
 }
 .kyc-color {
   color: #d23edd;
+}
+.hidden {
+  visibility: hidden;
 }

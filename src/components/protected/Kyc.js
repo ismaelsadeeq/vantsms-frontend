@@ -37,13 +37,17 @@ function Kyc() {
   const [profilePic,setProfilePic] = useState(false);
   const [number, setNumber] = useState("");
   const [selectedFile, setSelectedFile] = useState(undefined);
-  const [count,setCount] = useState(0)
-  const [id,setId] = useState("")
+  const [count,setCount] = useState(0);
+  const [id,setId] = useState("");
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState(null);
   const [kycData,setKycData]= useState(null);
   const [kycStatus, setKycStatus] = useState(null)
-  const [certlength, setCertlength] = useState(null)
+  const [certlength, setCertlength] = useState(null);
+  const [search,setSearch] = useState(false);
+  const [searchEmail, setSearchEmail] = useState("");
+  const [searchData, setSearchData] = useState(null)
+
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
@@ -150,7 +154,7 @@ function Kyc() {
   const getUsers = ()=>{
     axios({
       method: 'GET',
-      url: `${url}/admin/users?currentPage=${count}&pageLimit=6`,
+      url: `${url}/admin/users?currentPage=${count}&pageLimit=5`,
       headers:{
         Authorization:`Bearer ${token}`,
       }
@@ -165,25 +169,28 @@ function Kyc() {
       console.log(error);
     })
   }
-  const addCount = () =>{
+  const addCount = () => {
     let newCount = count + 1
     setCount(newCount);
   }
-  const subtractCount = () =>{
+  const subtractCount = () => {
+    console.log(count);
     if(count > 0){
-      let newCount = count - 1
-      setCount(newCount)
+      console.log(count);
+      return setCount(count -1)
     }else{
       alert("this is the first page")
     } 
   }
-  const back = () =>{
+  const back = (e) =>{
+    e.preventDefault()
     subtractCount();
-     getUsers();
+    return getUsers();
   }
-  const next = () =>{
-    addCount();
-     getUsers();
+  const next = (e) =>{
+    e.preventDefault()
+    setCount(count +1);
+    return getUsers();
   }
   const openUserModal = (id)=>{
     setId(id);
@@ -227,6 +234,34 @@ function Kyc() {
     })
 
   }
+  const searchChange= (e) =>{
+    e.preventDefault();
+    return setSearchEmail(e.target.value);
+  }
+  const searchHandler = ()=>{
+     setSearch(true);
+     console.log(searchEmail);
+     axios({
+      method: 'GET',
+      url: `${url}/admin/search?search=${searchEmail}`,
+      headers:{
+        Authorization:`Bearer ${token}`,
+      }
+     
+    }).then(response=>{
+      console.log(response.data);
+      if(response.data.message ==="user found"){
+         setSearchData(response.data.data)
+         console.log(searchData);
+      }
+      if(response.data.message ==="user not found"){
+        return setSearchData(null);
+      }
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+  }
   useEffect(() => {
     setAccountBalance();
     kyc();
@@ -235,7 +270,6 @@ function Kyc() {
     getUsers();
     console.log(user.firstname)
     console.log(account)
-   
   }, [token])
   
   if(kycDetails =="uploaded"){
@@ -347,11 +381,54 @@ function Kyc() {
           <div className="margin"></div>
          <div className={ `${showLinks?"hid":"kyc users"}`}>
          <div className="">
+           <div className="search">
+               <div className="searchDiv">
+               <input className="searchInput" placeholder="Search for a user" value={searchEmail} onChange={
+                 (e)=>{
+                   searchChange(e)
+                 }
+               } />
+               <button className="searchButton view-btn btn btn-danger" onClick={searchHandler}>search</button>
+               </div>
+           </div>
            {
+             search?<div>
+               {
+                 searchData?<div className="user " key={searchData.id}>
+                 <div className="center">
+                  <span className="user-avatar"><CgProfile/></span>
+                  <span className="user-name">{searchData.firstname + " "+ searchData.lastname}</span>
+                </div>
+                <div>
+                <span className="kycStatus">kyc status:{
+                  searchData.kycStatus?<span className="kyc-color"> verified</span>:<span className="kyc-color"> not verified</span>
+               }
+               </span>
+                </div>
+                <div >
+                  <button className="user-btn" onClick={()=>{openUserModal(searchData.id)}}>
+                  user info
+                  </button>
+                </div>
+                <div>
+                <button className="view-btn btn btn-danger" onClick={()=>{
+                  setSearch(false)
+                  setSearchEmail("");
+                }
+                  }>back</button>
+                </div>
+              </div>:<div>
+                      <p>oops there is no user with such email</p>
+                      <button className="view-btn btn btn-danger" onClick={()=>{setSearch(false)}}>back</button>
+                 </div>
+               }
+
+             </div>:<div>
+               {
              users.map((data)=>{
                const {id, firstname, lastname,kycStatus} = data;
                return  <div className="user " key={id}>
-               <div className="center">
+                <div className="center">
                  <span className="user-avatar"><CgProfile/></span>
                  <span className="user-name">{firstname + " "+ lastname}</span>
                </div>
@@ -369,13 +446,20 @@ function Kyc() {
              </div>
              })
            }
-            <div className="transaction-btn">
-              <button className="view-btn btn btn-danger" onClick={back}>
+             </div>
+           }
+           
+            <div className={search?"hidden":"transaction-btn"}>
+            <form onSubmit={(e)=>{back(e)}}>
+              <button className="view-btn btn btn-danger" type="submit">
                 back
               </button>
-              <button className="view-btn btn" onClick={next}>
+            </form>
+            <form onSubmit={(e)=>{next(e)}}>
+              <button className="view-btn btn btn-danger" type="submit">
                 next
               </button>
+            </form>
             </div>
           </div> 
          </div>
