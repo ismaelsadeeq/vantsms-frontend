@@ -384,7 +384,7 @@ function Kyc() {
             </div>
           </div>
           <div className="margin"></div>
-         <div className={ `${showLinks?"hid":"kyc users"}`}>
+         <div className={ `${showLinks?"hid":"kyc users width"}`}>
          <div className="">
            <div className="search">
                <div className="searchDiv">
@@ -424,7 +424,8 @@ function Kyc() {
                 </div>
               </div>:<div>
                       <p>oops there is no user with such email</p>
-                      <button className="view-btn btn btn-danger" onClick={()=>{setSearch(false)}}>back</button>
+                      <button className="view-btn btn btn-danger" onClick={()=>{ setSearch(false)
+                  setSearchEmail("");}}>back</button>
                  </div>
                }
 
@@ -507,7 +508,22 @@ function Kyc() {
   )
   }
   return ( // This is the Method that loads default because no Kyc is uploaded
-      <div></div>
+    <div className="dashContainer">
+    <div className="">
+        <Sidebar />
+    </div>
+  <div className="dashContainer-box">
+      <div className="dashContainer-nav">
+        <div className="dashContainer-nav-content">
+        {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
+        <p>{user.firstname}</p>
+        {account?<p>{account}</p>:<p>0.00</p>}
+        </div>
+      </div>
+      <div className="margin"></div>
+      
+  </div>
+  </div>
   )
 }
 

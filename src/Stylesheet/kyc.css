@@ -29,6 +29,9 @@
     padding: 1rem;
     margin-top:2rem ;
     width: 80%;
+    height: 100vh;
+  }
+  .width {
     height: 100%;
   }
   .kyc form {
@@ -48,6 +51,9 @@
     flex-direction: column;
     border: 1px solid #fff;
     padding: 1rem 1rem;
+  }
+  .zero {
+    margin-bottom:0rem ;
   }
 
 }
@@ -106,6 +112,9 @@
   .users {
     overflow-y: hidden;
   }
+  .white {
+    background-color: #fff;
+  }
 
 }
 /* Modal */
@@ -133,7 +142,6 @@
   padding: 2rem;
   max-width: var(--fixed-width);
   display: grid;
-  place-items: center;
   position: relative;
 }
 .close-modal-btn {
@@ -185,7 +193,9 @@
   display: flex;
   justify-content: space-between;
 }
-
+.column {
+  flex-direction: column;
+}
 .user-btn {
   font-family: ubuntu;
   padding: .4em;
@@ -198,4 +208,10 @@
 }
 .hidden {
   visibility: hidden;
+}
+.adminSupport {
+  padding: .5rem;
+}
+.margin-btn {
+  margin: 1rem;
 }
