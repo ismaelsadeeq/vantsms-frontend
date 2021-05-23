@@ -87,8 +87,8 @@ function AdminSupport({props}) {
               </p>
             <div>
             </div>
-            <textarea name="supportReply" rows="4" value={reply} className="adminSupport" placeholder="write here" onChange={(e)=>{setReply(e.target.value)}}>
-          </textarea>
+            <textarea name="supportReply" rows="4" value={reply} className="adminSupport" placeholder="write here" onChange={(e)=>{setReply(e.target.value)}} required />
+          
             <button className="btn view-btn margin-btn" onClick={(e)=>{
               submitHandler(e)
             }}>
