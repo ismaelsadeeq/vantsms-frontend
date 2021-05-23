@@ -151,7 +151,7 @@ function Support() {
               </button>
           </div>
         </div>
-        <TransactionModal  />
+        {isModalOpen? <TransactionModal  />:null}
       </div>
     )
   }
