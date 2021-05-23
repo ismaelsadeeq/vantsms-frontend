@@ -73,9 +73,17 @@ const EditProfile = () => {
      
     }).then(response=>{
       console.log(response.data)
-      if(response.data.status === 'success'){
+      if(response.data === 'password changed'){
         alert("password updated")
-        closeModal()
+        return closeModal()
+      }
+      if(response.data === 'password did not match'){
+        alert("password did not match")
+        return setChangePassword(changePasswordData)
+      }
+      if(response.data === 'incorrect password'){
+        alert("incorrect password")
+        return setChangePassword(changePasswordData)
       }
     })
     .catch(error=>{

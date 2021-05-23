@@ -21,6 +21,7 @@ function Sidebar() {
   const logOut = () =>{
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    toggleLinks()
     history.push("/login");
   }
   return (
