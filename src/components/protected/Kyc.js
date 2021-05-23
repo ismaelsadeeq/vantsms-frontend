@@ -28,15 +28,14 @@ function Kyc() {
     setAccountBalance,
     kycDetails,
     setKycDetails,
-  
     openUser,
     isUserOpen,
     setIsUserOpen,
     setGetUser
   } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false);
-  const [number, setNumber] = useState("");
-  const [selectedFile, setSelectedFile] = useState(undefined);
+  const [number,setNumber] = useState("");
+  const [selectedFile,setSelectedFile] = useState(null);
   const [count,setCount] = useState(0);
   const [id,setId] = useState("");
   const [users, setUsers] = useState([]);
@@ -52,7 +51,7 @@ function Kyc() {
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
-      history.push("/login")
+      history.push("/login");
     }
   }
   const kyc =()=>{
@@ -100,57 +99,56 @@ function Kyc() {
       console.log(error); 
     })
   }
-  function submitHandler (e) {
+  async function submitHandler (e) {
     e.preventDefault();
     const formData = new FormData();
-    console.log(number)
-    formData.append("cacNo", number);
-    formData.append("cacCertificate", selectedFile); // If I set this state with e.target.file[0] it displays blank screen 
-    console.log(formData)
+    formData.append('caCertificate', selectedFile); 
+    formData.append('cacNo', number);
     axios({
       method: 'POST',
       url: `${url}/kyc`,
       data: formData,
       headers:{
-        "Content-type":"multipart/form-data",
-        "Authorization":`Bearer ${token}`,
+        "Authorization":`Bearer ${token}`
       }
      
     }).then(response=>{
       console.log(response.data)
-      if(response.data.status === 'success'){
-        
+      if(response.data.message === 'kyc uploaded'){
+        alert("kyc uploaded");
+        kyc();
       }
     })
     .catch(error=>{
-      console.log(error);
+      console.log(error)
+    })
+  }
+  async function submitHandler2 (e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('caCertificate', selectedFile); 
+    formData.append('cacNo', number);
+    axios({
+      method: 'PUT',
+      url: `${url}/kyc`,
+      data: formData,
+      headers:{
+        "Authorization":`Bearer ${token}`
+      }
+     
+    }).then(response=>{
+      console.log(response.data)
+      if(response.data.message === 'kyc updated'){
+        alert("kyc updated");
+        kyc();
+      }
+    })
+    .catch(error=>{
+      console.log(error)
     })
   }
   const changeHandler = (e)=>{ //this is the change handler
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-
-    reader.onload = (e) =>{ // I try posting only the image on change
-      const formData = {caCertificate:e.target.result}
-      console.log(token)
-      axios({
-        method: 'POST',
-        url: `${url}/kyc`,
-        data: formData,
-        headers:{
-          "Authorization":`Bearer ${token}`,
-        }
-       
-      }).then(response=>{
-        console.log(response.data)
-        if(response.data.status === 'success'){
-          
-        }
-      })
-      .catch(error=>{
-        console.log(error);
-      })
-    } 
+    setSelectedFile(e.target.files[0]);
   }
   const getUsers = ()=>{
     axios({
@@ -356,7 +354,7 @@ function Kyc() {
          <div>
             <h4 className="text-me"> Your <span className="text"> Corporate Affairs Certificate</span> Validation failed</h4>
             <h4 className="text-me">No worries you can upload again</h4>
-            <form onSubmit={(e)=>{submitHandler(e)}}>
+            <form onSubmit={(e)=>{submitHandler2(e)}}>
             <label>certificate</label>
             <input type="file" className="cac" name="caCertificate"  onChange={(e)=>{changeHandler(e)}} required/>
             <label>certicate number</label>
