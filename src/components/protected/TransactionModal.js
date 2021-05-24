@@ -5,7 +5,8 @@ import {url} from '../url'
 import axios from "axios";
 const TransactionModal = () => {
   const {isModalOpen,token,closeModal,getReplies} = useGlobalContext();
-  const [supportData,setSupportData] = useState(null)
+  const [supportData,setSupportData] = useState([]);
+
   const support = ()=>{
     axios({
       method: 'GET',
@@ -17,8 +18,9 @@ const TransactionModal = () => {
     }).then(response=>{
       console.log(response.data);
       if(response.data.data){
-        setSupportData(response.data.data)
+        return setSupportData(response.data.data)
       }
+      return setSupportData([]);
     })
     .catch(error=>{
       console.log(error);
@@ -30,7 +32,7 @@ const TransactionModal = () => {
   return <div className={`${isModalOpen?'modal-overlay show-modal':'modal-overlay'}`}>
     <div className='modal-container'>
       {
-        supportData?<div>
+        supportData.length>1?<div>
            <h3>Support replies</h3>
            {
              supportData.map((data)=>{
@@ -43,9 +45,8 @@ const TransactionModal = () => {
              })
            }
         </div>:
-        
         <div>
-           <h3>No Replies yet</h3>
+           <p>oops you did not send a message</p>
         </div>
       }
      

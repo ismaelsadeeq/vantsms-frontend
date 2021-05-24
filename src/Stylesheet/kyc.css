@@ -115,7 +115,9 @@
   .white {
     background-color: #fff;
   }
-
+  .height {
+    height: 100%;
+  }
 }
 /* Modal */
 .modal-overlay {
@@ -214,4 +216,11 @@
 }
 .margin-btn {
   margin: 1rem;
+}
+.height {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(241, 241, 241);
+  width: 100%;
 }

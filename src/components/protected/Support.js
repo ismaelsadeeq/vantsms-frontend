@@ -24,8 +24,7 @@ function Support() {
     token,
     setToken,
     setTheUser,
-    setAccountBalance,
-    getReplies
+    setAccountBalance
   } = useGlobalContext()
   const [profilePic,setProfilePic] = useState(false)
   const [support,setSupport] = useState("");
@@ -33,7 +32,9 @@ function Support() {
   const [count, setCount]= useState(0);
   const [messages,setMessages] = useState([]);
   const [all, setAll] = useState(true)
+  const [limit,setLimit] = useState(null)
   const [props,setProps] = useState(null);
+  const [isback, setIsback] = useState(false);
   const setTheToken = () =>{
     setToken(helpers.getToken());
     if(helpers.getToken() == null){
@@ -68,10 +69,11 @@ function Support() {
       }
     }).then(response => {
       console.log(response.data);
-      if(youAdmin==="yes" && response.data.length <1){
+      if(youAdmin==="yes" && response.data.supports.length <1 && !isback){
         return setAdminStatus("admin no message");
       }
-      return setMessages(response.data)
+      setLimit(response.data.count)
+      return setMessages(response.data.supports)
       
     })
     .catch(error=>{
@@ -111,6 +113,29 @@ function Support() {
     }
     setProps(data);
     return openModal();
+  }
+  const subtractCount = () => {
+    console.log(count);
+    if(count > 0){
+      console.log(count);
+      return setCount(count -1)
+    }else{
+      alert("this is the first page")
+    } 
+  }
+  const back = () =>{
+    setIsback(true);
+    subtractCount();
+    return kyc();
+  }
+  const next = () =>{
+    console.log("limit",limit/5)
+    let high = Math.floor(limit/5)
+    if(count > high){
+      return alert("no more users to message")
+    }
+    setCount(count +1);
+    return kyc()
   }
   useEffect(() => {
     kyc()
@@ -162,7 +187,7 @@ function Support() {
       <div className="">
           <Sidebar />
       </div>
-      <div className="dashContainer-box">
+      <div className="height">
           <div className="dashContainer-nav">
             <div className="dashContainer-nav-content">
             {profilePic? <img src={profile} className="avatar"/>:<div><CgProfile /></div>}
@@ -187,7 +212,7 @@ function Support() {
                  <span className=""><span className="kyc-color">Message: </span >{support}</span>
                </div>
                <div>
-               <div className="status">status:{
+               <div className="status">status: {
                  supportReply?<span className="kyc-color">replied</span>:<span className="kyc-color">not replied</span>
               }
               </div>
@@ -201,6 +226,14 @@ function Support() {
               </div>
             })
             }
+            <div className="transaction-btn">
+              <button className="view-btn btn btn-danger" onClick={back}>
+                Back
+              </button>
+              <button className="view-btn btn" onClick={next}>
+                Next
+              </button>
+            </div>
           </div>
         </div>
         {isModalOpen?<AdminSupport props={props}/>:null}

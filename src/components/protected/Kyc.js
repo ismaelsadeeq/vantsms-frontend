@@ -169,10 +169,6 @@ function Kyc() {
       console.log(error);
     })
   }
-  const addCount = () => {
-    let newCount = count + 1
-    setCount(newCount);
-  }
   const subtractCount = () => {
     console.log(count);
     if(count > 0){
