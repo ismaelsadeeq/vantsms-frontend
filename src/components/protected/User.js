@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { FaTimes } from 'react-icons/fa'
 import { useGlobalContext } from '../context/context'
 import { useHistory } from "react-router-dom";
@@ -51,9 +51,6 @@ function User({user,kyc,status,certlength}) {
       console.log(error);
     })
   }
-  useEffect(() => {
-    console.log(kyc)
-  }, [])
   return <div className={`${isUserOpen?'modal-overlay show-modal':'modal-overlay'}`}>
     <div className='modal-container'>
       <h4> {user?user.firstname +" "+ user.lastname:"something went wrong"}</h4>
