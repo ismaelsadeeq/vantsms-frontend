@@ -48,10 +48,13 @@ function AdminSupport({props}) {
   }
   const submitHandler =(e)=>{
     e.preventDefault()
+    console.log(reply)
     axios({
       method: 'PUT',
       url: `${url}/admin/support/${props.id}`,
-      data:reply,
+      data:{
+        reply:reply
+      },
       headers:{
         Authorization:`Bearer ${token}`,
       }
