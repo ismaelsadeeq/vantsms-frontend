@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect} from 'react';
 import { FaTimes } from 'react-icons/fa'
 import { useGlobalContext } from '../context/context'
 import { useHistory } from "react-router-dom";
@@ -51,6 +51,9 @@ function User({user,kyc,status,certlength}) {
       console.log(error);
     })
   }
+  useEffect(() => {
+    console.log(kyc)
+  }, [])
   return <div className={`${isUserOpen?'modal-overlay show-modal':'modal-overlay'}`}>
     <div className='modal-container'>
       <h4> {user?user.firstname +" "+ user.lastname:"something went wrong"}</h4>
@@ -58,7 +61,10 @@ function User({user,kyc,status,certlength}) {
       {status?
        <div>
          <p>uploaded</p>
-         <p><a target="_blank" href={`http://127.0.0.1:8081/${kyc?kyc.caCertificate.slice(6,certlength):null}`} className="btn view-btn">view</a></p>
+         <p>{
+           kyc?
+           <a target="_blank" href={`http://127.0.0.1:8081/${kyc?kyc.caCertificate.slice(6,certlength):null}`} className="btn view-btn">view</a>:null
+          }</p>
          {kyc?<div> {kyc.isVerified?<p><button className="btn view-btn" onClick={()=>{unverifyHandler()}}>unverify</button></p>:
           <p><button className="btn view-btn" onClick={()=>{verifyHandler()}}>verify</button></p>
          }</div>:null}

@@ -193,10 +193,10 @@ function Kyc() {
     setCount(count +1);
     return getUsers();
   }
-  const openUserModal = (id)=>{
+  const openUserModal = async (id)=>{
     setId(id);
-    openUser()
-    axios({
+    console.log("ssss",id)
+    await axios({
       method: 'GET',
       url: `${url}/admin/users/${id}`,
       headers:{
@@ -213,7 +213,7 @@ function Kyc() {
     .catch(error=>{
       console.log(error);
     })
-    axios({
+    await axios({
       method: 'GET',
       url: `${url}/kyc/${id}`,
       headers:{
@@ -225,15 +225,15 @@ function Kyc() {
       if(response.data.data){
         setKycStatus(true);  
         setKycData(response.data.data)
-        setCertlength(parseInt(kycData.caCertificate.length))
-        return console.log(certlength)
+        setCertlength(parseInt(response.data.data.caCertificate.length))
+        return
       }
       setKycStatus(false);
     })
     .catch(error=>{
       console.log(error);
     })
-
+    openUser()
   }
   const searchChange= (e) =>{
     e.preventDefault();
@@ -466,7 +466,7 @@ function Kyc() {
           </div> 
          </div>
        </div>
-       {isUserOpen?<User user={userData} kyc={kycData} status={kycStatus} certlength={certlength} />:null}
+       {isUserOpen? <User user={userData} kyc={kycData} status={kycStatus} certlength={certlength} />:null}
     </div>
     )
   }
